@@ -2,13 +2,13 @@
   <div class="topbar">
     <div class="topbar-icons">
       <TopBarIcon href="https://youtube.com">
-        <IconMail></IconMail>
+        <IconMail />
       </TopBarIcon>
       <TopBarIcon href="https://youtube.com">
-        <IconMail></IconMail>
+        <IconMail />
       </TopBarIcon>
       <TopBarIcon href="https://youtube.com">
-        <IconMail></IconMail>
+        <IconMail />
       </TopBarIcon>
     </div>
   </div>
@@ -17,8 +17,6 @@
 <script lang="ts">
 export default {
   name: "TopBar",
-  components: {},
-
 }
 </script>
 
