@@ -1,14 +1,14 @@
 <template>
   <div class="topbar">
     <div class="topbar-icons">
-      <TopBarIcon href="https://youtube.com">
+      <TopBarIcon href="#">
         <IconMail />
       </TopBarIcon>
-      <TopBarIcon href="https://youtube.com">
-        <IconMail />
+      <TopBarIcon href="tel:0344156800">
+        <IconPhone />
       </TopBarIcon>
-      <TopBarIcon href="https://youtube.com">
-        <IconMail />
+      <TopBarIcon href="https://www.facebook.com/beauvaisis">
+        <IconFacebook />
       </TopBarIcon>
     </div>
   </div>
@@ -25,7 +25,7 @@ export default {
   display: flex;
   width: 100%;
   height: 64px;
-  background-color: #18314f;
+  background-color: var(--dark-blue);
   align-items: center;
   justify-content: end;
 }

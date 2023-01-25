@@ -15,6 +15,7 @@ export default {
     href: {
       type: String,
       value: "",
+      required: true,
     },
   },
 }
@@ -26,7 +27,7 @@ export default {
   position: relative;
   width: 44px;
   height: 44px;
-  background-color: #8bbeb2 ;
+  background-color: var(--light-blue) ;
   border-radius: 50%;
   margin-left: 22px;
 }

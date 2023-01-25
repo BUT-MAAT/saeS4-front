@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <TopPage />
+  <div id="app">
+    <Testing name="AROUF GANGSTA"/>
   </div>
 </template>
 
