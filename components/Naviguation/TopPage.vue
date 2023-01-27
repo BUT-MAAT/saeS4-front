@@ -1,6 +1,7 @@
 <template>
-  <div class="topapge">
+  <div class="toppage">
     <TopBar />
+    <NavBar />
   </div>
 </template>
 
