@@ -10,10 +10,13 @@
 
 <script lang="ts">
 export default {
-  name: "Title",
-  path: {
-    type: String,
-    default: "",
+  name: "Breadcrum",
+  props: {
+    path: {
+      type: String,
+      default: "",
+      required:true,
+    },
   },
 }
 </script>
