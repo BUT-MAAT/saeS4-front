@@ -13,6 +13,7 @@ export default {
 
 <style scoped>
 .searchbar-container {
+  position: relative;
   width: 67%;
   max-width: 550px;
   height: 64px;
@@ -20,7 +21,7 @@ export default {
 
 input {
   display: inline-block;
-  width: calc(95% - 64px); /* FIXME: space between input and btn */
+  width: calc(100% - 64px); /* FIXME: space between input and btn */
   padding: 0;
   height: 64px;
   border: 0;
@@ -41,6 +42,7 @@ button {
   background-color: var(--light-blue);
   border: 0;
   border-radius: 0 16px 16px 0;
+  position: absolute;
 }
 
 button:hover {
