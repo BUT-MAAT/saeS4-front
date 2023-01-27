@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Testing name="AROUF GANGSTA"/>
+    <h1>HOME</h1>
   </div>
 </template>
 
