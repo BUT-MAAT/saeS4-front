@@ -15,6 +15,7 @@ h1 {
   color: var(--white);
   font-size: 48px;
   font-weight: bold;
+  text-align: center;
 }
 
 h1::after {
