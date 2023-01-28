@@ -6,8 +6,12 @@
 </template>
 
 <script lang="ts">
+import IconDateTime from "~/components/Icons/IconeDateTime.vue";
 export default {
   name:"DateTime",
+  components:{
+    IconDateTime,
+  },
   props:{
     date:{
       type:String,
