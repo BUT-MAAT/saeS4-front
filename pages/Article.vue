@@ -1,26 +1,25 @@
 <template>
   <article>
     <Hero>
-      <div class="article-header-content">
-        <div class="article-header-top">
-          <div class="article-breadcrumb">
-            <Breadcrumb :path="data.pathv" />
+      <div class="article-header-top-content">
+          <div class="article-header-top">
+            <div class="article-breadcrumb">
+              <Breadcrumb :path="data.pathv" />
+            </div>
+            <div class="article-datetime">
+              <DateTime :date="data.date" />
+            </div>
           </div>
-          <div class="article-datetime">
-            <DateTime :date="data.date" />
+
+          <div class="article-header-tags-title">
+            <div class="article-tags">
+              <Tag v-for="tag in data.tags" :key="tag">{{ tag }}</Tag>
+            </div>
+            <Title>{{data.title}}</Title>
           </div>
         </div>
 
-        <div class="article-header-bot">
-          <div class="article-header-tags-title">
-              <div class="article-tags">
-                <Tag v-for="tag in data.tags" :key="tag">{{ tag }}</Tag>
-              </div>
-              <Title>{{data.title}}</Title>
-          </div>
-<!--          <ShortDescription>{{ data.description }}</ShortDescription>-->
-        </div>
-      </div>
+        <ShortDescription>{{ data.description }}</ShortDescription>
     </Hero>
 
     <div class="article-body">
@@ -50,11 +49,7 @@ const dataVue = new Vue({
 </script>
 
 <style scoped>
-.article-body {
-  margin-bottom: 100px;
-}
-
-.article-header-content {
+.article-header-top-content {
   width: 100%;
   position: relative;
   z-index: 20;
@@ -67,13 +62,6 @@ const dataVue = new Vue({
   justify-content: space-between;
   width: 100%;
   height: 40px;
-}
-
-.article-header-bot {
-  height: 80%;
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: space-around;
 }
 
 .article-header-tags-title {
