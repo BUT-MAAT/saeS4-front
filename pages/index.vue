@@ -4,16 +4,16 @@
       <Title>Communauté d'agglomération du Beauvaisis</Title>
       <HeroSearchBar />
     </Hero>
+    <QuickAccess />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import Hero from "~/components/Hero/Hero.vue";
-import HeroSearchBar from "~/components/Hero/HeroSearchBar.vue";
+import QuickAccess from "~/components/Navigation/QuickAccess/QuickAccess.vue";
 
 export default Vue.extend({
   name: 'IndexPage',
-  components: {HeroSearchBar, Hero},
+  components: {QuickAccess},
 })
 </script>

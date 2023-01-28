@@ -1,6 +1,6 @@
 <template>
   <nav class="navbar">
-    <a class="navbar-brand" href="/">
+    <a class="navbar-brand" href="/static">
       <img
         src="@/images/LogoAgglo.png"
         alt="Logo agglomération Beauvaisis"
