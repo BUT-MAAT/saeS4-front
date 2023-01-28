@@ -3,7 +3,7 @@
     <div class="hero-content">
       <slot />
     </div>
-<!--    <HeroWave />-->
+    <HeroWave />
   </section>
 </template>
 
@@ -53,11 +53,4 @@ export default {
   position: relative;
   z-index: 20;
 }
-
-/*@media screen and (max-height: 500px) {*/
-/*  .hero-container {*/
-/*    height: min(100vh, 100%);*/
-/*    padding: 2rem 0;*/
-/*  }*/
-/*}*/
 </style>
