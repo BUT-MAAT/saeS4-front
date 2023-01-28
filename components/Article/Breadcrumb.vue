@@ -15,7 +15,7 @@ export default {
     path: {
       type: String,
       default: "",
-      required:true,
+      required: true,
     },
   },
 }

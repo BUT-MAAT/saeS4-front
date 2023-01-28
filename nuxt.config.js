@@ -31,7 +31,7 @@ export default {
       "~/components/Icons/",
       "~/components/Naviguation/",
       "~/components/Article/",
-      "~/components/Utils",
+      "~/components/Utils/",
     ],
   },
 

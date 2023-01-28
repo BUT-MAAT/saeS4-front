@@ -6,16 +6,12 @@
 </template>
 
 <script lang="ts">
-import IconDateTime from "~/components/Icons/IconeDateTime.vue";
 export default {
   name:"DateTime",
-  components:{
-    IconDateTime,
-  },
-  props:{
-    date:{
-      type:String,
-      required:true,
+  props: {
+    date: {
+      type: String,
+      required: true,
     },
   },
 }
@@ -47,5 +43,4 @@ export default {
     border-radius: 20px;
   }
 }
-
 </style>

@@ -1,6 +1,6 @@
 <template>
   <article>
-    <div class="article-header-container">
+    <Hero>
       <div class="article-header-content">
         <div class="article-header-top">
           <div class="article-breadcrumb">
@@ -13,17 +13,15 @@
 
         <div class="article-header-bot">
           <div class="article-header-tags-title">
-            <div class="article-tags">
-              <Tag v-for="tag in data.tags" :key="tag">{{ tag }}</Tag>
-            </div>
-            <div class="article-title">
-              <ArticleTitle>{{data.title}}</ArticleTitle>
-            </div>
+              <div class="article-tags">
+                <Tag v-for="tag in data.tags" :key="tag">{{ tag }}</Tag>
+              </div>
+              <Title>{{data.title}}</Title>
           </div>
+<!--          <ShortDescription>{{ data.description }}</ShortDescription>-->
         </div>
       </div>
-      <HeroWave />
-    </div>
+    </Hero>
 
     <div class="article-body">
       <span v-html="data.content"> </span>
@@ -32,22 +30,19 @@
 </template>
 
 <script setup lang="ts">
-
-import é     from "../components/Hero/HeroWave.vue";
-import ArticleTitle from "../components/Article/Title.vue";
-import Tag          from "../components/Article/Tag.vue";
-import Breadcrumb   from "../components/Article/Breadcrumb.vue";
-import DateTime from "../components/Article/DateTime.Vue";
 import Vue from 'vue';
 
-
+/** TODO:
+ * Parse the date
+ */
 const data = {
-  title: 'test Title trop swag',
-  slug: 'testSlug',
+  title: 'Article title',
+  description: 'Short description of this article',
+  slug: 'this-article',
   content:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-  date:'2023-01-27T15:12:05.932Z',
-  pathv: 'test/oe/oklm',
-  tags: ["test1","test2","test3"],
+  date: '2023-01-27T15:12:05.932Z',
+  pathv: 'Home/.../title article',
+  tags: ["tag1","tag2","tag3"],
 }
 const dataVue = new Vue({
   data: data,
@@ -55,31 +50,12 @@ const dataVue = new Vue({
 </script>
 
 <style scoped>
-.article-header-container {
-  position: relative;
-  background-image: url("../images/HeroBackground.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 100%;
-  height: calc(95vh - var(--navBar-height) - var(--topBar-height));
-  overflow: auto;
-}
-
-.article-header-container::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    78deg,
-    rgba(66, 51, 51, 0.6) -14%,
-    rgba(88, 71, 71, 0.3) 86%
-  );
-  z-index: 10;
+.article-body {
+  margin-bottom: 100px;
 }
 
 .article-header-content {
+  width: 100%;
   position: relative;
   z-index: 20;
   height: 80%;
@@ -87,9 +63,9 @@ const dataVue = new Vue({
 }
 
 .article-header-top {
-  margin-top: 40px;
   display: flex;
   justify-content: space-between;
+  width: 100%;
   height: 40px;
 }
 
@@ -100,7 +76,7 @@ const dataVue = new Vue({
   justify-content: space-around;
 }
 
-.article-header-tags-title .article-title {
+.article-header-tags-title {
   margin-top: 20px;
 }
 
@@ -112,7 +88,7 @@ const dataVue = new Vue({
 
 .article-body {
   width: 80%;
-  margin: 50px auto auto;
+  margin: 100px auto;
   font-size: 24px;
 }
 
@@ -122,21 +98,9 @@ const dataVue = new Vue({
 }
 
 @media screen and (max-height: 750px) {
-  .article-header-container {
-    height: min(100vh, 100%);
-    padding: 4rem 0;
-  }
-
   .article-tags {
     margin: 2rem;
   }
-}
-
-@media screen and (max-height: 850px) {
-  .article-title {
-    width: 100%;
-  }
-
 }
 
 @media screen and (max-width: 800px) {
