@@ -2,19 +2,19 @@
   <section class="quickaccess-container">
     <SectionTitle class="quickaccess-title">Accès Rapide</SectionTitle>
     <div class="quickaccess-buttons">
-      <QuickAccessButton href="/news/fonctionnement-agglo">
+      <QuickAccessButton to="/news/fonctionnement-agglo">
         <template v-slot:icon><IconRouage /></template>
         <template v-slot:text>Fonctionnement de l'agglo</template>
       </QuickAccessButton>
-      <QuickAccessButton href="/news/les-secteurs-cles">
+      <QuickAccessButton to="/news/les-secteurs-cles">
         <template v-slot:icon><IconKey /></template>
         <template v-slot:text>Les secteurs clés</template>
       </QuickAccessButton>
-      <QuickAccessButton href="/news/tourisme">
+      <QuickAccessButton to="/news/tourisme">
         <template v-slot:icon><IconPassport /></template>
         <template v-slot:text>Sites touristiques</template>
       </QuickAccessButton>
-      <QuickAccessButton href="/news/transports-urbains">
+      <QuickAccessButton to="/news/transports-urbains">
         <template v-slot:icon><IconBus /></template>
         <template v-slot:text>Transports</template>
       </QuickAccessButton>

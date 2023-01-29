@@ -1,5 +1,5 @@
 <template>
-  <a class="QA-button" :href="href">
+  <NuxtLink class="QA-button" :to="to">
     <span class="QA-icon">
       <slot name="icon" />
     </span>
@@ -8,14 +8,14 @@
         <slot name="text" />
       </span>
     </div>
-  </a>
+  </NuxtLink>
 </template>
 
 <script>
 export default {
   name: "QuickAccessButton",
   props: {
-    href: {
+    to: {
       type: String,
       required: true,
     }
