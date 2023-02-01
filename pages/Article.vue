@@ -1,25 +1,21 @@
 <template>
   <article>
     <Hero>
-      <div class="article-header-top-content">
-          <div class="article-header-top">
-            <div class="article-breadcrumb">
-              <Breadcrumb :path="data.pathv" />
-            </div>
-            <div class="article-datetime">
-              <DateTime :date="data.date" />
-            </div>
-          </div>
-
-          <div class="article-header-tags-title">
-            <div class="article-tags">
-              <Tag v-for="tag in data.tags" :key="tag">{{ tag }}</Tag>
-            </div>
-            <Title>{{data.title}}</Title>
-          </div>
+      <div class="article-header-top">
+        <div class="article-breadcrumb">
+          <Breadcrumb :path="data.pathv" />
         </div>
+        <div class="article-datetime">
+          <DateTime :date="data.date" />
+        </div>
+      </div>
 
-        <ShortDescription>{{ data.description }}</ShortDescription>
+      <div class="article-header-tags-title">
+        <div class="article-tags">
+          <Tag v-for="tag in data.tags" :key="tag">{{ tag }}</Tag>
+        </div>
+        <Title>{{data.title}}</Title>
+      </div>
     </Hero>
 
     <div class="article-body">
@@ -49,15 +45,10 @@ const dataVue = new Vue({
 </script>
 
 <style scoped>
-.article-header-top-content {
-  width: 100%;
-  position: relative;
-  z-index: 20;
-  height: 80%;
-  color: var(--white);
-}
-
 .article-header-top {
+  color: var(--white);
+  position: absolute;
+  top: 0;
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -65,13 +56,17 @@ const dataVue = new Vue({
 }
 
 .article-header-tags-title {
-  margin-top: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .article-tags {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
+  margin-bottom: 36px;
 }
 
 .article-body {
