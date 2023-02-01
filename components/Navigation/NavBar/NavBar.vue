@@ -1,35 +1,35 @@
 <template>
   <nav class="navbar">
-    <a class="navbar-brand" href="/">
+    <NuxtLink class="navbar-brand" to="/">
       <img
         src="@/images/LogoAgglo.png"
         alt="Logo agglomération Beauvaisis"
       />
-    </a>
+    </NuxtLink>
 
     <NavBarHamburger class="navbar-hamburger" @inputchecked="valueChanged" />
 
     <div class="navbar-items" id="navbarItems">
       <NavBarItem
         class="navbar-item"
-        href="/"
+        to="/"
         isActive="true"
       >Accueil</NavBarItem>
       <NavBarItem
         class="navbar-item"
-        href="/news/presentation-generale"
+        to="/news/presentation-generale"
       >Présentation</NavBarItem>
       <NavBarItem
         class="navbar-item"
-        href="/news"
+        to="/news"
       >Actualité</NavBarItem>
       <NavBarItem
         class="navbar-item"
-        href="/news/tourisme"
+        to="/news/tourisme"
       >Tourisme</NavBarItem>
       <NavBarItem
         class="navbar-item"
-        href="/contact"
+        to="/contact"
       >Contact</NavBarItem>
     </div>
   </nav>

@@ -2,7 +2,7 @@
   <div class="topbar-button">
     <a class="topbar-content" :href="href">
       <span class="topbar-icon">
-        <slot></slot>
+        <slot />
       </span>
     </a>
   </div>

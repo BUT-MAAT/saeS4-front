@@ -1,12 +1,12 @@
 <template>
-  <a :href="href"><slot></slot></a>
+  <NuxtLink :to="to"><slot /></NuxtLink>
 </template>
 
 <script lang="ts">
 export default {
   name: "NavBarItem",
   props: {
-    href: {
+    to: {
       type: String,
       required: true,
     },

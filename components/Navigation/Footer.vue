@@ -1,5 +1,5 @@
 <template>
-  <div class="footer">
+  <section class="footer">
     <div class="footer-top">
       <div class="icons-container">
         <TopBarIcon href="/contact">
@@ -13,11 +13,11 @@
         </TopBarIcon>
       </div>
       <div class="navitems-container">
-        <span><a href="/">Accueil</a></span>
-        <span><a href="/">Présentation</a></span>
-        <span><a href="/">Actualité</a></span>
-        <span><a href="/">Tourisme</a></span>
-        <span><a href="/">Contact</a></span>
+        <span><a href="/static">Accueil</a></span>
+        <span><a href="/static">Présentation</a></span>
+        <span><a href="/static">Actualité</a></span>
+        <span><a href="/static">Tourisme</a></span>
+        <span><a href="/static">Contact</a></span>
       </div>
     </div>
 
@@ -26,7 +26,7 @@
         le site existant visuellement. <br> Le site de base est accessible via ce lien web : <a
           href="http://www.beauvaisis.fr/"> http://www.beauvaisis.fr/ </a></p>
     </div>
-  </div>
+  </section>
 </template>
 
 <script>

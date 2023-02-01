@@ -1,8 +1,8 @@
 <template>
-  <div class="toppage">
+  <section class="toppage">
     <TopBar />
     <NavBar />
-  </div>
+  </section>
 </template>
 
 <script lang="ts">

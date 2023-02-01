@@ -29,8 +29,8 @@ export default {
     dirs: [ // Put here dirs of components to auto-import them
       "~/components/",
       "~/components/Icons/",
-      "~/components/Naviguation/",
-      "~/components/Utils",
+      "~/components/Navigation/",
+      "~/components/Utils/",
     ],
   },
 

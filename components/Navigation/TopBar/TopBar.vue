@@ -1,5 +1,5 @@
 <template>
-  <div class="topbar">
+  <nav class="topbar">
     <div class="topbar-icons">
       <TopBarIcon href="#">
         <IconMail />
@@ -11,7 +11,7 @@
         <IconFacebook />
       </TopBarIcon>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script lang="ts">
