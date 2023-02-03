@@ -6,14 +6,14 @@
       </div>
       <div class="contactus-form">
         <form action="">
-          <ContactInput
+          <Input
             class="contactus-input"
             id="contactus-nom"
             name="nom"
             label="Nom"
             placeholder="Votre nom"
             type="text"/>
-          <ContactInput
+          <Input
             class="contactus-input"
             id="contactus-prenom"
             name="prenom"
@@ -21,7 +21,7 @@
             placeholder="Votre prénom"
             type="text"
           />
-          <ContactInput
+          <Input
             class="contactus-input"
             id="contactus-email"
             name="email"
@@ -29,14 +29,14 @@
             placeholder="Votre email"
             type="email"
           />
-          <ContactTextArea
+          <TextArea
             class="contactus-input"
             id="contactus-message"
             name="message"
             label="Message"
             placeholder="Votre message"
           />
-          <ContactSubmit class="contactus-submit" value="Envoyer" />
+          <SubmitButton class="contactus-submit" value="Envoyer" />
         </form>
       </div>
     </div>
