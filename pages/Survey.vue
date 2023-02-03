@@ -1,3 +1,9 @@
+<!--
+TODO: Better style
+TODO: use grid for personal information inputs
+TODO: use api to suggest and autocomplete the adress
+-->
+
 <template>
   <form action="">
     <div class="" id="section-email">
