@@ -14,7 +14,7 @@ export default {
   props: {
     href: {
       type: String,
-      value: "",
+      default: "",
       required: true,
     },
   },

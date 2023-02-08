@@ -1,7 +1,7 @@
 <template>
   <div class="input">
     <label :for="id">{{ label }}</label>
-    <input :id="id" :type="type" :name="name" :placeholder="placeholder" />
+    <input :id="id" :type="type" :name="name" :placeholder="placeholder" @keydown="checkCharacterAllowed"/>
   </div>
 </template>
 
@@ -12,13 +12,25 @@ export default {
     label: String,
     type: {
       type: String,
-      value: "text",
+      default: "text",
     },
     name: String,
     placeholder: String,
     id: {
       type: String,
       required: true,
+    },
+    charactersAllowed: {
+      type: String,
+      default: " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-@",
+    },
+  },
+  methods: {
+    checkCharacterAllowed: function(event) {
+      const whitespaces = ["Backspace", "Enter"]
+      if (!(this.charactersAllowed.includes(event.key) || whitespaces.includes(event.key))) {
+        event.preventDefault();
+      }
     },
   },
 }

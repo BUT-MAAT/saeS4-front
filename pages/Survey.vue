@@ -14,12 +14,12 @@ TODO: use api to suggest and autocomplete the adress
         Veuillez entrer votre email pour pouvoir commencer le sondage
       </p>
       <Input
-      id="email"
-      label="Email"
-      type="email"
-      name="email"
-      placeholder="Votre Email"
-      class="email"
+        id="email"
+        label="Email"
+        type="email"
+        name="email"
+        placeholder="Votre Email"
+        class="email"
       />
       <Button v-if="!isStarted"
         id="start-survey"
@@ -64,7 +64,8 @@ export default {
   methods : {
     isEmailValid: function(event) {
       const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-      const email = document.getElementById("email").value;
+      const emailInput = document.getElementById("email");
+      const email = emailInput.value;
       if (!email.match(validRegex)) {
         this.hasError = true;
         this.msgError = "Votre email n'est pas valide";
