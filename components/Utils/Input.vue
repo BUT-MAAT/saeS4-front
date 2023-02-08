@@ -24,6 +24,7 @@ export default {
       type: String,
       default: " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-@",
     },
+    pattern: RegExp,
   },
   methods: {
     checkCharacterAllowed: function(event) {
@@ -31,6 +32,12 @@ export default {
       if (!(this.charactersAllowed.includes(event.key) || whitespaces.includes(event.key))) {
         event.preventDefault();
       }
+    },
+    checkPattern: function() {
+      if (this.pattern) {
+        return !!document.getElementById(this.id).value.match(this.pattern);
+      }
+      return true;
     },
   },
 }
