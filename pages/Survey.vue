@@ -46,7 +46,7 @@ TODO: use api to suggest and autocomplete the adress
       </div>
 
       <div class="form-section">
-
+        <SelectAliments />
       </div>
     </div>
   </form>
