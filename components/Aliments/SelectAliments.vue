@@ -1,15 +1,17 @@
+<!-- TODO: Generic component in util -->
 <template>
   <div class="menu">
     <div class="filters">
       <ScrollList ref="categorie"
                   @change.native="onCategorieChange"
-                  :options="categories"/>
+                  :options="getCategorieNames(this.categories)"
+                  display-name="nom_categorie"/>
       <ScrollList ref="ss-categorie"
                   @change.native="onSsCategorieChange"
-                  :options="ssCategories"/>
+                  :options="getCategorieNames(this.ssCategories)"/>
       <ScrollList ref="ss-ss-categorie"
                   @change.native="onSsSsCategorieChange"
-                  :options="ssSsCategories"/>
+                  :options="getCategorieNames(this.ssSsCategories)"/>
     </div>
     <hr>
     <div class="results">
@@ -19,7 +21,7 @@
     </div>
     <hr>
     <div class="selected">
-
+      <!-- TODO: selected aliments component -->
     </div>
   </div>
 </template>
@@ -37,15 +39,36 @@ export default {
   },
   methods: {
     loadCategories: function() {
-      this.categories = ["categ1", "categ2"];
+      const url ="http://localhost:9000/api/categories/categorie/all";
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          this.categories = data;
+        });
     },
     loadSsCategories: function() {
-      this.ssCategories = ["ss_categ"];
+      // TODO: get idCategorie
+      const idCategorie = 1;
+      const url = `http://localhost:9000/api/categories/by_parent?parent_id=${idCategorie}`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          this.ssCategories = data;
+        });
     },
     loadSsSsCategories: function() {
-      this.ssSsCategories = ["ss_ss_categ"];
+      // TODO: get idCategorie
+      const idCategorie = 101;
+      const url = `http://localhost:9000/api/categories/by_parent?parent_id=${idCategorie}`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          this.ssSsCategories = data;
+        });
     },
     loadAliments: function() {
+      // TODO: load from db all aliments depending ss_ss_categories
       this.aliments = [
         {id: 1, name: "Carotte",},
         {id: 2, name: "Patate",},
@@ -55,6 +78,11 @@ export default {
         {id: 6, name: "Pomme",},
       ];
     },
+
+    getCategorieNames: function(categorieList) {
+      return categorieList.map(option => option.nom_categorie);
+    },
+
     onCategorieChange: function() {
       this.$refs["ss-categorie"].setPlaceholder("--Choisissez une option--");
       console.log(this.$refs["ss-categorie"].placeholder);
@@ -67,6 +95,7 @@ export default {
     onSsSsCategorieChange: function() {
       this.loadAliments();
     },
+
     selectAliment: function(event) {
 
     },
@@ -81,6 +110,7 @@ export default {
 </script>
 
 <style scoped>
+/* TODO: style */
 hr {
   margin: 40px 0;
 }
