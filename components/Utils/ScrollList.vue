@@ -1,6 +1,6 @@
 <template>
   <select id="select">
-    <option value="">--Choissisez une option--</option>
+    <option value="" disabled selected>{{ placeholder }}</option>
     <option v-for="option in options" :value="option">
       {{ option }}
     </option>
@@ -13,10 +13,18 @@ export default {
   props: {
     options: Array,
   },
+  data() {
+    return {
+      placeholder: "--Choisissez une option--",
+    }
+  },
   methods: {
+    setPlaceholder: function(value) {
+      this.placeholder = value;
+    },
     getSelected: function() {
       return document.getElementById("select").value;
-    }
+    },
   },
 }
 </script>
