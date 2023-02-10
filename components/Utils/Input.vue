@@ -1,7 +1,7 @@
 <template>
   <div class="input">
     <label :for="id">{{ label }}</label>
-    <input :id="id" :type="type" :name="name" :placeholder="placeholder" @keydown="checkCharacterAllowed"/>
+    <input :id="id" :type="type" :name="name" :placeholder="placeholder" @keydown="checkCharacterAllowed" @input="valueUpdated"/>
   </div>
 </template>
 
@@ -32,6 +32,12 @@ export default {
       if (!(this.charactersAllowed.includes(event.key) || whitespaces.includes(event.key))) {
         event.preventDefault();
       }
+    },
+    valueUpdated: function(event){
+      this.$emit("valueUpdated",event.target.value);
+    },
+    setValue: function(value){
+      document.getElementById(this.id).value = value
     },
     checkPattern: function() {
       if (this.pattern) {
