@@ -5,13 +5,19 @@
       <ScrollList ref="categorie"
                   @change.native="onCategorieChange"
                   :options="getCategorieNames(this.categories)"
-                  display-name="nom_categorie"/>
+                  label="Catégorie"
+      />
       <ScrollList ref="ss-categorie"
                   @change.native="onSsCategorieChange"
-                  :options="getCategorieNames(this.ssCategories)"/>
+                  :options="getCategorieNames(this.ssCategories)"
+                  label="Sous-catégorie"
+      />
       <ScrollList ref="ss-ss-categorie"
                   @change.native="onSsSsCategorieChange"
-                  :options="getCategorieNames(this.ssSsCategories)"/>
+                  :options="getCategorieNames(this.ssSsCategories)"
+                  label="Sous-sous-catégorie"
+                  disabled
+      />
     </div>
     <hr>
     <SelectMultiple :items="getAlimentNames()"/>
@@ -79,12 +85,11 @@ export default {
     },
 
     onCategorieChange: function() {
-      this.$refs["ss-categorie"].setPlaceholder("--Choisissez une option--");
-      console.log(this.$refs["ss-categorie"].placeholder);
+      this.$refs["ss-categorie"].enable();
       this.loadSsCategories();
     },
     onSsCategorieChange: function() {
-      this.$refs["ss-ss-categorie"].setPlaceholder("--Choisissez une option--");
+      this.$refs["ss-ss-categorie"].enable();
       this.loadSsSsCategories();
     },
     onSsSsCategorieChange: function() {
@@ -96,9 +101,11 @@ export default {
     },
   },
   mounted: function() {
-    this.$refs["categorie"].setPlaceholder("--Choisissez une catégorie--")
-    this.$refs["ss-categorie"].placeholder = "--Sélectionnez une catégorie avant--";
-    this.$refs["ss-ss-categorie"].placeholder = "--Sélectionnez une sous-catégorie avant--";
+    this.$refs["categorie"].setPlaceholder("--Choisissez une catégorie--");
+    this.$refs["ss-categorie"].setPlaceholder("--Choisissez une sous-catégorie--");
+    this.$refs["ss-categorie"].disable();
+    this.$refs["ss-ss-categorie"].setPlaceholder("--Choisissez une sous-sous-catégorie--");
+    this.$refs["ss-ss-categorie"].disable();
     this.loadCategories();
   },
 }
