@@ -1,10 +1,10 @@
 <template>
   <div class="scroll-list">
     <label>{{ label }}</label>
-    <select id="select" :disabled="disabled === true">
+    <select class="selectScrollList" ref="select" :disabled="disabled === true">
       <option value="" disabled selected>{{ placeholder }}</option>
-      <option v-for="option in options" :value="option">
-        {{ option }}
+      <option v-for="item in getItemsDisplayField()" :value="item">
+        {{ item }}
       </option>
     </select>
   </div>
@@ -15,7 +15,8 @@ export default {
   name: "ScrollList",
   props: {
     label: String,
-    options: Array,
+    items: Array,
+    displayField: String,
   },
   data() {
     return {
@@ -24,6 +25,9 @@ export default {
     }
   },
   methods: {
+    getItemsDisplayField: function() {
+      return this.items.map(item => item[this.displayField]);
+    },
     setPlaceholder: function(value) {
       this.placeholder = value;
     },
@@ -33,8 +37,11 @@ export default {
     enable: function() {
       this.disabled = false;
     },
+    selectDefault: function() {
+      this.$refs.select.selectedIndex = 0;
+    },
     getSelected: function() {
-      return document.getElementById("select").value;
+      return this.items[this.$refs.select.selectedIndex - 1];
     },
   },
 }
