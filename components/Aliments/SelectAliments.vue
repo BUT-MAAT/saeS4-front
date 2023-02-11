@@ -29,7 +29,6 @@
 </template>
 
 <script>
-// TODO: Auto select when there is only 1 item in ScrollList
 export default {
   name: "SelectAliments",
   data() {
@@ -43,7 +42,7 @@ export default {
   methods: {
     loadCategories: function() {
       const url ="http://localhost:9000/api/categories/categorie/all";
-      fetch(url)
+      return fetch(url)
         .then((response) => response.json())
         .then((data) => {
           this.categories = data;
@@ -52,7 +51,7 @@ export default {
     loadSsCategories: function() {
       const idCategorie = this.$refs["categorie"].getSelected().id_categorie;
       const url = `http://localhost:9000/api/categories/by_parent?parent_id=${idCategorie}`;
-      fetch(url)
+      return fetch(url)
         .then((response) => response.json())
         .then((data) => {
           this.ssCategories = data;
@@ -61,7 +60,7 @@ export default {
     loadSsSsCategories: function() {
       const idSsCategorie = this.$refs["ss-categorie"].getSelected().id_categorie;
       const url = `http://localhost:9000/api/categories/by_parent?parent_id=${idSsCategorie}`;
-      fetch(url)
+      return fetch(url)
         .then((response) => response.json())
         .then((data) => {
           this.ssSsCategories = data;
@@ -70,41 +69,34 @@ export default {
     loadAliments: function() {
       const idSsSsCategorie = this.$refs["ss-ss-categorie"].getSelected().id_categorie;
       const url = `http://localhost:9000/api/aliment/by_soussouscategorie?soussouscategorie_id=${idSsSsCategorie}`
-      fetch(url)
+      return fetch(url)
         .then((response) => response.json())
         .then((data) => {
           this.aliments = data;
         });
     },
-    getAlimentNames: function() {
-      return this.aliments.map(aliment => aliment.name);
-    },
 
-    onCategorieChange: function() {
+    onCategorieChange: async function() {
+      await this.loadSsCategories();
       this.$refs["ss-categorie"].enable();
       this.$refs["ss-categorie"].selectDefault();
-      this.loadSsCategories();
     },
-    onSsCategorieChange: function() {
+    onSsCategorieChange: async function() {
+      await this.loadSsSsCategories();
       this.$refs["ss-ss-categorie"].enable();
       this.$refs["ss-ss-categorie"].selectDefault();
-      this.loadSsSsCategories();
     },
-    onSsSsCategorieChange: function() {
-      this.loadAliments();
-    },
-
-    selectAliment: function(event) {
-
+    onSsSsCategorieChange: async function() {
+      await this.loadAliments();
     },
   },
-  mounted: function() {
+  mounted: async function() {
+    await this.loadCategories();
     this.$refs["categorie"].setPlaceholder("--Choisissez une catégorie--");
     this.$refs["ss-categorie"].setPlaceholder("--Choisissez une sous-catégorie--");
     this.$refs["ss-categorie"].disable();
     this.$refs["ss-ss-categorie"].setPlaceholder("--Choisissez une sous-sous-catégorie--");
     this.$refs["ss-ss-categorie"].disable();
-    this.loadCategories();
   },
 }
 </script>

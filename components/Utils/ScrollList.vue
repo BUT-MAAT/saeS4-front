@@ -38,7 +38,13 @@ export default {
       this.disabled = false;
     },
     selectDefault: function() {
+      this.enable();
       this.$refs.select.selectedIndex = 0;
+      if (this.items.length === 1) {
+        this.$refs.select.selectedIndex = 1;
+        this.$el.dispatchEvent(new Event("change"));
+        this.disable();
+      }
     },
     getSelected: function() {
       return this.items[this.$refs.select.selectedIndex - 1];
