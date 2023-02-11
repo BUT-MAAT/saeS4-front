@@ -14,15 +14,7 @@
                   :options="getCategorieNames(this.ssSsCategories)"/>
     </div>
     <hr>
-    <div class="results">
-      <CardAliment v-for="aliment in aliments"
-        :name="aliment.name"
-      />
-    </div>
-    <hr>
-    <div class="selected">
-      <!-- TODO: selected aliments component -->
-    </div>
+    <SelectMultiple :items="getAlimentNames()"/>
   </div>
 </template>
 
@@ -82,6 +74,9 @@ export default {
     getCategorieNames: function(categorieList) {
       return categorieList.map(option => option.nom_categorie);
     },
+    getAlimentNames: function() {
+      return this.aliments.map(aliment => aliment.name);
+    },
 
     onCategorieChange: function() {
       this.$refs["ss-categorie"].setPlaceholder("--Choisissez une option--");
@@ -122,11 +117,5 @@ hr {
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
-.results {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 10px;
 }
 </style>
