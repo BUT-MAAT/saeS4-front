@@ -1,4 +1,3 @@
-<!-- TODO: Generic component in util -->
 <template>
   <div class="menu">
     <div class="filters">
@@ -22,11 +21,15 @@
       />
     </div>
     <hr>
-    <SelectMultiple :items="getAlimentNames()"/>
+    <SelectMultiple
+      :items="aliments"
+      display-field="nom_aliment"
+    />
   </div>
 </template>
 
 <script>
+// TODO: Auto select when there is only 1 item in ScrollList
 export default {
   name: "SelectAliments",
   data() {
@@ -107,7 +110,10 @@ export default {
 </script>
 
 <style scoped>
-/* TODO: style */
+/*
+  TODO: Better ScrollList style
+  TODO: Better component style
+*/
 hr {
   margin: 40px 0;
 }

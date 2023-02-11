@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="items-available">
-      <div class="item" v-for="item in items" >
+      <div class="item" v-for="item in getItemsDisplayField()" >
         <span>{{ item }}</span>
       </div>
     </div>
@@ -22,15 +22,21 @@ export default {
     }
   },
   props: {
-    items: {
-      type: Array,
-      required: true,
-    },
+    items: Array,
+    displayField: String,
+  },
+  methods: {
+    getItemsDisplayField() {
+      return this.items.map(item => item[this.displayField]);
+    }
   },
 }
 </script>
 
 <style scoped>
+/*
+  TODO: Better item style
+*/
 .items-available {
   display: flex;
   flex-wrap: wrap;
