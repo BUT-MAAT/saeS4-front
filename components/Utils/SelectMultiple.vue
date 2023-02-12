@@ -109,6 +109,9 @@ export default {
   background-color: var(--dark-blue);
   padding: 10px;
 }
+.item:hover {
+  cursor: default;
+}
 .disabled-item {
   background-color: darkgray;
 }
@@ -142,6 +145,9 @@ export default {
   align-items: center;
   width: fit-content;
   min-width: fit-content;
+}
+.selected-item:hover {
+  cursor: default;
 }
 .remove-selected-item {
   margin-left: 10px;
