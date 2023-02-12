@@ -46,7 +46,7 @@ export default {
       }
     },
     removeSelectedItem: function(index) {
-      this.selectedItems.splice(index);
+      this.selectedItems.splice(index, 1);
     },
     isInSelectedItems(item) {
       return this.selectedItems.includes(item);
