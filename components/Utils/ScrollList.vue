@@ -64,4 +64,7 @@ select {
   border: 2px solid var(--light-blue);
   font-size: 16px;
 }
+label {
+  font-weight: bold;
+}
 </style>

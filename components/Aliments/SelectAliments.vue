@@ -114,12 +114,11 @@ export default {
 </script>
 
 <style scoped>
-/*
-  TODO: Better component style
-*/
 hr {
-  margin: 40px 0;
+  border: 1px solid black;
+  margin: 20px 0;
 }
+
 .menu {
   background-color: var(--white);
   padding: 40px;

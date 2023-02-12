@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="select-multiple">
     <div class="items-available">
       <div class="item"
            v-for="(item, index) in items"
@@ -9,7 +9,6 @@
         <span>{{ item[displayField] }}</span>
       </div>
     </div>
-    <hr>
     <div class="items-selected">
       <div class="selected-items">
         <div class="selected-item"
@@ -76,21 +75,19 @@ export default {
 </script>
 
 <style scoped>
-/*
-  TODO: Better style
-  TODO: Better UX (handle too much items maybe with scrolls)
-*/
 .items-available {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
   gap: 10px;
+  height: 200px;
+  overflow-y: scroll;
+  border: 1px solid black;
+  padding: 10px;
 }
 .item {
-  border: 1px solid black;
   border-radius: 4px;
-  color: black;
-  background-color: var(--light-blue);
+  color: var(--white);
+  background-color: var(--dark-blue);
   padding: 10px;
 }
 .item:hover {
@@ -100,21 +97,36 @@ export default {
   background-color: darkgray;
 }
 
-.selected-item {
+.items-selected {
+  height: 100px;
+  overflow-y: scroll;
   border: 1px solid black;
-  border-radius: 4px;
-  color: var(--white);
-  background-color: var(--dark-blue);
+  padding: 10px;
+}
+.selected-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.selected-item {
+  border-radius: 100px;
+  color: black;
+  background-color: var(--light-blue);
   padding: 6px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: fit-content;
+  min-width: fit-content;
+}
+.remove-selected-item {
+  margin-left: 10px;
 }
 .remove-selected-item:hover {
    cursor: pointer;
  }
 .remove-selected-item-icon {
-  fill: var(--white);
+  fill: black;
   width: 16px;
   height: auto;
 }
