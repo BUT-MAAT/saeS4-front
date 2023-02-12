@@ -80,12 +80,23 @@ export default {
     },
 
     onCategorieChange: async function() {
+      this.aliments.splice(0, this.aliments.length);
+      this.$refs["ss-categorie"].clear();
+      this.$refs["ss-ss-categorie"].clear();
+
       await this.loadSsCategories();
+
       this.$refs["ss-categorie"].enable();
       this.$refs["ss-categorie"].selectDefault();
+      this.$refs["ss-ss-categorie"].disable();
+      this.$refs["ss-ss-categorie"].selectDefault();
     },
     onSsCategorieChange: async function() {
+      this.aliments.splice(0, this.aliments.length);
+      this.$refs["ss-ss-categorie"].clear();
+
       await this.loadSsSsCategories();
+
       this.$refs["ss-ss-categorie"].enable();
       this.$refs["ss-ss-categorie"].selectDefault();
     },
@@ -95,6 +106,7 @@ export default {
   },
   mounted: async function() {
     await this.loadCategories();
+
     this.$refs["ss-categorie"].disable();
     this.$refs["ss-ss-categorie"].disable();
   },

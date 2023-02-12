@@ -35,7 +35,6 @@ export default {
       this.disabled = false;
     },
     selectDefault: function() {
-      this.enable();
       this.$refs.select.selectedIndex = 0;
       if (this.items.length === 1) {
         this.$refs.select.selectedIndex = 1;
@@ -46,6 +45,9 @@ export default {
     getSelected: function() {
       return this.items[this.$refs.select.selectedIndex - 1];
     },
+    clear: function() {
+      this.items.splice(0, this.items.length);
+    }
   },
 }
 </script>
