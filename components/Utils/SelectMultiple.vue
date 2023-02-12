@@ -97,7 +97,7 @@ export default {
 .items-available {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
   height: 200px;
   overflow-y: scroll;
   border: 1px solid black;
@@ -107,13 +107,16 @@ export default {
   border-radius: 4px;
   color: var(--white);
   background-color: var(--dark-blue);
-  padding: 10px;
+  padding: 4px 6px;
 }
 .item:hover {
   cursor: default;
 }
 .disabled-item {
   background-color: darkgray;
+}
+.select-item {
+  margin-left: 4px;
 }
 .select-item:hover {
   cursor: pointer;
@@ -133,13 +136,13 @@ export default {
 .selected-items {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
 }
 .selected-item {
   border-radius: 100px;
   color: black;
   background-color: var(--light-blue);
-  padding: 6px;
+  padding: 4px 6px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -150,7 +153,7 @@ export default {
   cursor: default;
 }
 .remove-selected-item {
-  margin-left: 10px;
+  margin-left: 4px;
 }
 .remove-selected-item:hover {
    cursor: pointer;
@@ -160,5 +163,4 @@ export default {
   width: 16px;
   height: auto;
 }
-
 </style>
