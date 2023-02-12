@@ -28,9 +28,6 @@ export default {
     }
   },
   methods: {
-    setPlaceholder: function(value) {
-      this.placeholder = value;
-    },
     disable: function() {
       this.disabled = true;
     },
