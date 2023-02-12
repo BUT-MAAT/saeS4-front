@@ -1,7 +1,7 @@
 <template>
   <div class="scroll-list">
     <label>{{ label }}</label>
-    <select class="selectScrollList" ref="select" :disabled="disabled === true">
+    <select ref="select" :disabled="disabled === true">
       <option value="" disabled selected>{{ placeholder }}</option>
       <option v-for="item in items" :value="item">
         {{ item[displayField] }}
@@ -55,5 +55,11 @@ export default {
   display: flex;
   flex-direction: column;
   color: black;
+}
+select {
+  height: 48px;
+  border-radius: 10px;
+  border: 2px solid var(--light-blue);
+  font-size: 16px;
 }
 </style>
