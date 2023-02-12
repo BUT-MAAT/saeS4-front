@@ -3,8 +3,8 @@
     <label>{{ label }}</label>
     <select class="selectScrollList" ref="select" :disabled="disabled === true">
       <option value="" disabled selected>{{ placeholder }}</option>
-      <option v-for="item in getItemsDisplayField()" :value="item">
-        {{ item }}
+      <option v-for="item in items" :value="item">
+        {{ item[displayField] }}
       </option>
     </select>
   </div>
@@ -25,9 +25,6 @@ export default {
     }
   },
   methods: {
-    getItemsDisplayField: function() {
-      return this.items.map(item => item[this.displayField]);
-    },
     setPlaceholder: function(value) {
       this.placeholder = value;
     },

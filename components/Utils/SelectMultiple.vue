@@ -1,13 +1,24 @@
 <template>
   <div>
     <div class="items-available">
-      <div class="item" v-for="item in getItemsDisplayField()" >
-        <span>{{ item }}</span>
+      <div class="item"
+           v-for="(item, index) in items"
+           @click="selectItem(index)"
+      >
+        <span>{{ item[displayField] }}</span>
       </div>
     </div>
     <hr>
     <div class="items-selected">
        <!-- TODO: selected items -->
+      <div class="selected-items">
+        <div class="selected-item"
+             v-for="(item, index) in selectedItems"
+        >
+          <span>{{ item[displayField] }}</span>
+          <span class="remove-selected-item" @click="removeSelectedItem(index)"> - </span>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -18,7 +29,7 @@ export default {
   name: "SelectMultiple",
   data() {
     return {
-      itemsSelected: [],
+      selectedItems: [],
     }
   },
   props: {
@@ -26,8 +37,12 @@ export default {
     displayField: String,
   },
   methods: {
-    getItemsDisplayField() {
-      return this.items.map(item => item[this.displayField]);
+    selectItem: function(index) {
+      console.log("select");
+      this.selectedItems.push(this.items[index]);
+    },
+    removeSelectedItem: function(index) {
+      this.selectedItems.splice(index);
     }
   },
 }
@@ -47,9 +62,24 @@ export default {
   border: 1px solid black;
   border-radius: 4px;
   color: black;
+  background-color: var(--light-blue);
   padding: 10px;
 }
 .item:hover {
+  cursor: pointer;
+}
+
+
+.selected-item {
+  border: 1px solid black;
+  border-radius: 4px;
+  color: var(--white);
+  background-color: var(--dark-blue);
+  padding: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+.remove-selected-item:hover {
   cursor: pointer;
 }
 </style>
