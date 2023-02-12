@@ -17,11 +17,14 @@ export default {
     label: String,
     items: Array,
     displayField: String,
+    placeholder: {
+      type: String,
+      default: "--"
+    }
   },
   data() {
     return {
       disabled: false,
-      placeholder: "--Choisissez une option--",
     }
   },
   methods: {

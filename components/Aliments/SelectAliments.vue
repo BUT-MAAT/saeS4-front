@@ -6,18 +6,21 @@
                   :items="categories"
                   display-field="nom_categorie"
                   label="Catégorie"
+                  placeholder="-- Choisissez une catégorie --"
       />
       <ScrollList ref="ss-categorie"
                   @change.native="onSsCategorieChange"
                   :items="ssCategories"
                   display-field="nom_categorie"
                   label="Sous-catégorie"
+                  placeholder="-- Choisissez une sous-catégorie --"
       />
       <ScrollList ref="ss-ss-categorie"
                   @change.native="onSsSsCategorieChange"
                   :items="ssSsCategories"
                   display-field="nom_categorie"
                   label="Sous-sous-catégorie"
+                  placeholder="-- Choisissez une sous-sous-catégorie --"
       />
     </div>
     <hr>
@@ -92,10 +95,7 @@ export default {
   },
   mounted: async function() {
     await this.loadCategories();
-    this.$refs["categorie"].setPlaceholder("--Choisissez une catégorie--");
-    this.$refs["ss-categorie"].setPlaceholder("--Choisissez une sous-catégorie--");
     this.$refs["ss-categorie"].disable();
-    this.$refs["ss-ss-categorie"].setPlaceholder("--Choisissez une sous-sous-catégorie--");
     this.$refs["ss-ss-categorie"].disable();
   },
 }
