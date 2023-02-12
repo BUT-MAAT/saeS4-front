@@ -2,8 +2,8 @@
   <div>
     <div class="items-available">
       <div class="item"
-           :class="{ 'disabled-item': isInSelectedItems(item) }"
            v-for="(item, index) in items"
+           :class="{ 'disabled-item': isInSelectedItems(item) }"
            @click="selectItem(index, $event)"
       >
         <span>{{ item[displayField] }}</span>
@@ -52,17 +52,24 @@ export default {
     isInSelectedItems(item) {
       // cannot use `this.selectedItems.includes(item)`
       // because when same are reloaded it doesn't work
-      let isInside = false;
       for (let selectedItem of this.selectedItems) {
-        isInside = true;
-        for (let field in selectedItem) {
-          if (selectedItem[field] !== item[field]) {
-            isInside = false;
-            break;
-          }
-        }
+        if (this._isSameItem(selectedItem, item)) return true;
       }
-      return isInside
+      return false;
+    },
+    _isSameItem: function(itemA, itemB) {
+      if (itemA === itemB) return true;
+
+      const valuesItemA = Object.values(itemA);
+      const valuesItemB = Object.values(itemB);
+
+      if (valuesItemA.length !== valuesItemB.length) return false;
+
+      for (let i in valuesItemA) {
+        if (valuesItemA[i] !== valuesItemB[i]) return false;
+      }
+
+      return true;
     },
   },
 }
