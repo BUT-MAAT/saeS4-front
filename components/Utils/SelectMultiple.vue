@@ -2,8 +2,9 @@
   <div>
     <div class="items-available">
       <div class="item"
+           :class="{ 'disabled-item': isInSelectedItems(item) }"
            v-for="(item, index) in items"
-           @click="selectItem(index)"
+           @click="selectItem(index, $event)"
       >
         <span>{{ item[displayField] }}</span>
       </div>
@@ -15,7 +16,7 @@
              v-for="(item, index) in selectedItems"
         >
           <span>{{ item[displayField] }}</span>
-          <span class="remove-selected-item" @click="removeSelectedItem(index)">
+          <span class="remove-selected-item" @click="removeSelectedItem(index, $event)">
             <IconTrash class="remove-selected-item-icon" />
           </span>
         </div>
@@ -39,12 +40,17 @@ export default {
   },
   methods: {
     selectItem: function(index) {
-      console.log("select");
-      this.selectedItems.push(this.items[index]);
+      const item = this.items[index];
+      if (!this.isInSelectedItems(item)) {
+        this.selectedItems.push(item);
+      }
     },
     removeSelectedItem: function(index) {
       this.selectedItems.splice(index);
-    }
+    },
+    isInSelectedItems(item) {
+      return this.selectedItems.includes(item);
+    },
   },
 }
 </script>
@@ -68,6 +74,9 @@ export default {
 }
 .item:hover {
   cursor: pointer;
+}
+.disabled-item {
+  background-color: darkgray;
 }
 
 
