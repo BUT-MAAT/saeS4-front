@@ -1,24 +1,32 @@
 <template>
   <div class="select-multiple">
     <div class="items-available">
-      <div class="item"
+      <InfoCard class="item"
            v-for="(item, index) in items"
            :class="{ 'disabled-item': isInSelectedItems(item) }"
-           @click="selectItem(index, $event)"
       >
         <span>{{ item[displayField] }}</span>
-      </div>
+        <span class="select-item"
+              @click="selectItem(index)"
+        >
+          <IconPlus class="select-item-icon" v-if="!isInSelectedItems(item)"/>
+          <IconMinus class="select-item-icon" v-else/>
+        </span>
+      </InfoCard>
     </div>
+
     <div class="items-selected">
       <div class="selected-items">
-        <div class="selected-item"
+        <InfoCard class="selected-item"
              v-for="(item, index) in selectedItems"
         >
           <span>{{ item[displayField] }}</span>
-          <span class="remove-selected-item" @click="removeSelectedItem(index, $event)">
+          <span class="remove-selected-item"
+                @click="removeSelectedItemByIndex(index)"
+          >
             <IconTrash class="remove-selected-item-icon" />
           </span>
-        </div>
+        </InfoCard>
       </div>
     </div>
   </div>
@@ -44,9 +52,20 @@ export default {
       if (!this.isInSelectedItems(item)) {
         this.selectedItems.push(item);
       }
+      else {
+        console.log(item);
+        this.removeSelectedItem(item);
+      }
     },
-    removeSelectedItem: function(index) {
+    removeSelectedItemByIndex: function(index) {
       this.selectedItems.splice(index, 1);
+    },
+    removeSelectedItem: function(item) {
+      for (let index in this.selectedItems) {
+        if (this._isSameItem(this.selectedItems[index], item)) {
+          this.removeSelectedItemByIndex(index);
+        }
+      }
     },
     isInSelectedItems(item) {
       // cannot use `this.selectedItems.includes(item)`
@@ -90,11 +109,16 @@ export default {
   background-color: var(--dark-blue);
   padding: 10px;
 }
-.item:hover {
-  cursor: pointer;
-}
 .disabled-item {
   background-color: darkgray;
+}
+.select-item:hover {
+  cursor: pointer;
+}
+.select-item-icon {
+  width: 16px;
+  height: auto;
+  fill: var(--white);
 }
 
 .items-selected {
