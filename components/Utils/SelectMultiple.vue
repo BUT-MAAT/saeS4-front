@@ -10,13 +10,14 @@
     </div>
     <hr>
     <div class="items-selected">
-       <!-- TODO: selected items -->
       <div class="selected-items">
         <div class="selected-item"
              v-for="(item, index) in selectedItems"
         >
           <span>{{ item[displayField] }}</span>
-          <span class="remove-selected-item" @click="removeSelectedItem(index)"> - </span>
+          <span class="remove-selected-item" @click="removeSelectedItem(index)">
+            <IconTrash class="remove-selected-item-icon" />
+          </span>
         </div>
       </div>
     </div>
@@ -78,8 +79,15 @@ export default {
   padding: 6px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .remove-selected-item:hover {
-  cursor: pointer;
+   cursor: pointer;
+ }
+.remove-selected-item-icon {
+  fill: var(--white);
+  width: 16px;
+  height: auto;
 }
+
 </style>
