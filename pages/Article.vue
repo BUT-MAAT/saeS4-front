@@ -27,9 +27,7 @@
 <script setup lang="ts">
 import Vue from 'vue';
 
-/** TODO:
- * Parse the date
- */
+// TODO: Parse the date
 const data = {
   title: 'Article title',
   description: 'Short description of this article',

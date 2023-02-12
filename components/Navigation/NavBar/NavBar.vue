@@ -100,7 +100,6 @@ img {
   display: none;
 }
 
-/* TODO: adapter la navbar en plus petit pour les petits écrans de pc (sans le hamburger) */
 @media screen and (max-width: 1200px) {
   .navbar {
     flex-direction: column;

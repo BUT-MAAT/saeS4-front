@@ -115,7 +115,6 @@ export default {
 
 <style scoped>
 /*
-  TODO: Better ScrollList style
   TODO: Better component style
 */
 hr {

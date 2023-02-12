@@ -27,6 +27,7 @@
 </template>
 
 <script>
+// TODO: add info popup
 export default {
   name: "SelectMultiple",
   data() {
@@ -49,7 +50,19 @@ export default {
       this.selectedItems.splice(index, 1);
     },
     isInSelectedItems(item) {
-      return this.selectedItems.includes(item);
+      // cannot use `this.selectedItems.includes(item)`
+      // because when same are reloaded it doesn't work
+      let isInside = false;
+      for (let selectedItem of this.selectedItems) {
+        isInside = true;
+        for (let field in selectedItem) {
+          if (selectedItem[field] !== item[field]) {
+            isInside = false;
+            break;
+          }
+        }
+      }
+      return isInside
     },
   },
 }
@@ -57,7 +70,8 @@ export default {
 
 <style scoped>
 /*
-  TODO: Better item style
+  TODO: Better style
+  TODO: Better UX (handle too much items maybe with scrolls)
 */
 .items-available {
   display: flex;
@@ -78,7 +92,6 @@ export default {
 .disabled-item {
   background-color: darkgray;
 }
-
 
 .selected-item {
   border: 1px solid black;
