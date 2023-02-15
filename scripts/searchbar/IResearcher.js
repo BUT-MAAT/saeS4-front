@@ -1,7 +1,7 @@
-class Researcher
+class IResearcher
 {
   constructor() {
-    if(this.constructor == Researcher){
+    if(this.constructor == IResearcher){
       throw new Error(" Object of Abstract Class cannot be created");
     }
   }
@@ -9,4 +9,4 @@ class Researcher
     throw new Error("Abstract Method has no implementation");
   }
 }
-export default Researcher
+export default IResearcher

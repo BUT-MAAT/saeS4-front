@@ -7,6 +7,7 @@
       :placeholder="placeholder"
       ref="input"
       :charactersAllowed="charactersAllowed"
+      :pattern="pattern"
       @valueUpdated="valueUpdated"
     />
     <search-result :results=matchingPostaux @value-picked="valuePicked"></search-result>
@@ -53,7 +54,10 @@ export default {
      * @param value the input's value
      */
     valueUpdated: function(value){
-      this.matchingPostaux = this.researcher.getSearchResult(value);
+      this.researcher.getSearchResult(value).then(res =>{
+        this.matchingPostaux = res
+      })
+        .catch(reason => {});
     },
     /**
      * set the input's value
@@ -62,14 +66,15 @@ export default {
     setValue: function(value){
       this.$refs.input.setValue(value)
     },
+
     /**
      * This function is called when the user click on a searchbar value
      * it emit a new event, update the input's value and reset the search results
      * @param value
      */
     valuePicked: function (value){
-      this.$emit("valuePicked",value)
       this.$refs.input.setValue(value)
+      this.$emit("valuePicked",value)
       this.matchingPostaux = []
     },
   },

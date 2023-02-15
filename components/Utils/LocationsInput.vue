@@ -1,32 +1,56 @@
 <template>
   <div class="location">
-    <PostalInput
-      id="PostalCode"
+    <SearchbarInput
+      id="address"
+      label="Adresse"
+      name="address"
+      placeholder="Votre Adresse"
+      ref="address"
+      @valuePicked="AddressUpdated"
+      :pattern="/^\d{5}$/"
+      :researcher="researcher"
+    />
+
+    <Input
+      id="city"
+      label="Ville"
+      name="city"
+      placeholder="Votre Ville"
+      ref="city"
+    />
+    <Input
+      id="postal"
       label="Code Postal"
-      name="PostalCode"
-      placeholder="Code Postal"
+      name="postal"
+      placeholder="Votre Code Postal"
       ref="postal"
-      @keydown="handleKeydown"
     />
   </div>
-
 </template>
 
 <script>
-import test from "/scripts/test"
+
+
+import AddressResearcher from "~/scripts/searchbar/AddressResearcher";
 
 export default {
   name: "LocationsInput",
   mounted() {
-    console.log('tesddddddt')
-    new test(11,111);
-    // this.$refs.postal.testMethod();
   },
   methods:{
-    updateValue: function(){
-      console.log("svp pitié")
+    AddressUpdated: function(value){
+      const address = this.researcher.ParseJson(value)
+      this.$refs.address.setValue(address.street)
+      this.$refs.city.setValue(address.city)
+      this.$refs.postal.setValue(address.postal)
     }
-  }
+
+  },
+  data(){
+    return{
+      researcher:new AddressResearcher()
+    }
+  },
 }
 </script>
 
