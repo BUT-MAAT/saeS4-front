@@ -27,6 +27,9 @@ export default {
     pattern: RegExp,
   },
   methods: {
+    getValue: function(event) {
+      return document.getElementById(this.id).value;
+    },
     checkCharacterAllowed: function(event) {
       const whitespaces = ["Backspace", "Enter"]
       if (!(this.charactersAllowed.includes(event.key) || whitespaces.includes(event.key))) {
@@ -41,7 +44,7 @@ export default {
     },
     checkPattern: function() {
       if (this.pattern) {
-        return !!document.getElementById(this.id).value.match(this.pattern);
+        return !!this.getValue().match(this.pattern);
       }
       return true;
     },

@@ -25,34 +25,44 @@ TODO: use api to suggest and autocomplete the adress
         @keydown.native="startSurvey"
       />
       <Button v-if="!isStarted"
-        id="start-survey"
-        value="Commencer"
-        @click.native="startSurvey"/>
+              id="start-survey"
+              type="button"
+              value="Commencer"
+              @click.native="startSurvey"/>
     </div>
 
     <div v-if="isStarted" class="form-content">
       <div class="form-section" id="section-person">
         <Input
           id="firstname"
+          ref="firstname"
           label="Prénom"
           name="firstname"
           placeholder="Votre Prénom"
         />
         <Input
           id="lastname"
+          ref="lastname"
           label="Nom"
           name="lastname"
           placeholder="Votre Nom"
         />
       </div>
 
-      <div class="form-section">
-        <LocationsInput/>
+      <div class="form-section" id="section-location">
+        <LocationsInput ref="locations"/>
       </div>
 
-      <div class="form-section">
-        <SelectAliments />
+      <div class="form-section" id="section-aliments">
+        <SelectAliments ref="aliments"/>
       </div>
+
+      <button id="submit-survey"
+              type="submit"
+              @click="submitSurvey"
+      >
+        Envoyer
+      </button>
     </div>
   </form>
 </template>
@@ -69,7 +79,7 @@ export default {
     }
   },
   methods : {
-    isEmailValid: function(event) {
+    isEmailValid: async function(event) {
       const emailInputComponent = this.$refs.emailInputComponent;
       if (!emailInputComponent.checkPattern()) {
         this.hasError = true;
@@ -77,19 +87,47 @@ export default {
         return false;
       }
       // TODO: Check email if already done the survey
+      const url = "http://localhost:9000/api/utils/mail_valide"
+      const email = emailInputComponent.getValue();
+      const emailValid = (await fetch(url, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(email),
+      })).bodyUsed;
+
+      if (!emailValid) {
+        this.hasError = true;
+        this.msgError = "Vous avez déjà fait le sondage"; // TODO : change to an information page that tells he already send the survey
+        return false;
+      }
+
       return true;
     },
-    startSurvey: function(event) {
+    startSurvey: async function(event) {
       if (event.type === "keydown") {
         if (event.key !== "Enter") return;
         event.preventDefault();
       }
 
-      if (this.isEmailValid()) {
+      if (await this.isEmailValid()) {
         const emailInput = document.getElementById("email");
         emailInput.disabled = true;
         this.isStarted = true;
       }
+    },
+    checkInputValid: function(refInput) {
+      const input = this.$refs[refInput];
+      console.log(input);
+    },
+    submitSurvey: function(event) {
+      event.preventDefault(); // TO REMOVE FOR SUBMITTING
+      this.checkInputValid("firstname");
+      this.checkInputValid("lastname");
+      this.checkInputValid("locations");
+      this.checkInputValid("aliments");
     },
   }
 }
