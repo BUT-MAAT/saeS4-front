@@ -44,12 +44,9 @@ TODO: use api to suggest and autocomplete the adress
           name="lastname"
           placeholder="Votre Nom"
         />
-        <Input
-          id="firstname"
-          label="Prénom"
-          name="firstname"
-          placeholder="Votre Prénom"
-        />
+      </div>
+
+      <div class="form-section">
         <LocationsInput/>
       </div>
 
