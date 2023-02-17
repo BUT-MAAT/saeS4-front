@@ -81,23 +81,24 @@ export default {
   methods : {
     isEmailValid: async function(event) {
       const emailInputComponent = this.$refs.emailInputComponent;
+
       if (!emailInputComponent.checkPattern()) {
         this.hasError = true;
         this.msgError = "Votre email n'est pas valide";
         return false;
       }
-      // TODO: Check email if already done the survey
+
       const url = "http://localhost:9000/api/utils/mail_valide"
       const email = emailInputComponent.getValue();
-      const emailValid = (await fetch(url, {
+      const data = (await fetch(url, {
         method: "POST",
         headers: {
           "Accept": "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(email),
-      })).bodyUsed;
-
+        body: JSON.stringify({ "data": email }),
+      }).then(response => response.json()));
+      const emailValid = data.response;
       if (!emailValid) {
         this.hasError = true;
         this.msgError = "Vous avez déjà fait le sondage"; // TODO : change to an information page that tells he already send the survey
@@ -120,7 +121,7 @@ export default {
     },
     checkInputValid: function(refInput) {
       const input = this.$refs[refInput];
-      console.log(input);
+      console.log(input);ç
     },
     submitSurvey: function(event) {
       event.preventDefault(); // TO REMOVE FOR SUBMITTING
