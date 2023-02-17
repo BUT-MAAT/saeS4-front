@@ -53,7 +53,7 @@ export default {
     },
     loadSsCategories: function() {
       const idCategorie = this.$refs["categorie"].getSelected().id_categorie;
-      const url = `http://localhost:9000/api/categories/by_parent?parent_id=${idCategorie}`;
+      const url = `http://localhost:9000/api/categories/by_parent/${idCategorie}`;
       return fetch(url)
         .then((response) => response.json())
         .then((data) => {
@@ -62,7 +62,7 @@ export default {
     },
     loadSsSsCategories: function() {
       const idSsCategorie = this.$refs["ss-categorie"].getSelected().id_categorie;
-      const url = `http://localhost:9000/api/categories/by_parent?parent_id=${idSsCategorie}`;
+      const url = `http://localhost:9000/api/categories/by_parent/${idSsCategorie}`;
       return fetch(url)
         .then((response) => response.json())
         .then((data) => {
@@ -71,7 +71,7 @@ export default {
     },
     loadAliments: function() {
       const idSsSsCategorie = this.$refs["ss-ss-categorie"].getSelected().id_categorie;
-      const url = `http://localhost:9000/api/aliment/by_soussouscategorie?soussouscategorie_id=${idSsSsCategorie}`
+      const url = `http://localhost:9000/api/aliment/by_soussouscategorie/${idSsSsCategorie}?valeurs_nutritives=true`
       return fetch(url)
         .then((response) => response.json())
         .then((data) => {
