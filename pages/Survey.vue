@@ -43,6 +43,13 @@ TODO: use api to suggest and autocomplete the adress
           name="lastname"
           placeholder="Votre Nom"
         />
+        <Input
+          id="firstname"
+          label="Prénom"
+          name="firstname"
+          placeholder="Votre Prénom"
+        />
+        <LocationsInput/>
       </div>
 
       <div class="form-section">
@@ -53,6 +60,7 @@ TODO: use api to suggest and autocomplete the adress
 </template>
 
 <script>
+
 export default {
   name: "Survey",
   data() {
