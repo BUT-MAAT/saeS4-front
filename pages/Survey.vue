@@ -22,6 +22,7 @@ TODO: use api to suggest and autocomplete the adress
         placeholder="Votre Email"
         class="email"
         :pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
+        @keydown.native="startSurvey"
       />
       <Button v-if="!isStarted"
         id="start-survey"
@@ -53,7 +54,7 @@ TODO: use api to suggest and autocomplete the adress
       </div>
 
       <div class="form-section">
-
+        <SelectAliments />
       </div>
     </div>
   </form>
@@ -82,6 +83,11 @@ export default {
       return true;
     },
     startSurvey: function(event) {
+      if (event.type === "keydown") {
+        if (event.key !== "Enter") return;
+        event.preventDefault();
+      }
+
       if (this.isEmailValid()) {
         const emailInput = document.getElementById("email");
         emailInput.disabled = true;
@@ -93,6 +99,7 @@ export default {
 </script>
 
 <style scoped>
+
 form {
   width: 80%;
   margin: 40px auto;

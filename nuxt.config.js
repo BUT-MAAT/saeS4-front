@@ -32,6 +32,7 @@ export default {
       "~/components/Navigation/",
       "~/components/Article/",
       "~/components/Utils/",
+      "~/components/Aliments/",
     ],
   },
 

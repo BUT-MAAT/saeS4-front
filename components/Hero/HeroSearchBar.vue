@@ -21,7 +21,7 @@ export default {
 
 input {
   display: inline-block;
-  width: calc(100% - 64px); /* FIXME: space between input and btn */
+  width: calc(100% - 64px);
   padding: 0;
   height: 64px;
   border: 0;
