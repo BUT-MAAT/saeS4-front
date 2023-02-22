@@ -2,8 +2,8 @@
   <div class="select-multiple">
     <div class="items-available">
       <InfoCard class="item"
-           v-for="(item, index) in items"
-           :class="{ 'disabled-item': isInSelectedItems(item) }"
+                v-for="(item, index) in items"
+                :class="{ 'disabled-item': isInSelectedItems(item) }"
       >
         <span>{{ item[displayField] }}</span>
         <span class="select-item"

@@ -25,6 +25,10 @@
       />
     </div>
     <hr>
+    <div class="loading-aliments" v-if="alimentsLoading">
+      <span>CHARGEMENT DES ALIMENTS...</span>
+      <div class="loader"></div>
+    </div>
     <SelectMultiple
       ref="selectMultiple"
       :items="aliments"
@@ -32,7 +36,7 @@
       :min-to-select="10"
       :max-to-select="10"
     />
-    <span v-if="!component_loading" class="counter-items-selected" ref="counterItemsSelected">
+    <span v-if="!componentLoading" class="counter-items-selected" ref="counterItemsSelected">
       Vous avez sélectionné {{ this.getSelectedAliments().length }} aliments
     </span>
   </div>
@@ -43,7 +47,8 @@ export default {
   name: "SelectAliments",
   data() {
     return {
-      component_loading: true,
+      componentLoading: true,
+      alimentsLoading: false,
       categories: [],
       ssCategories: [],
       ssSsCategories: [],
@@ -109,7 +114,9 @@ export default {
       this.$refs["ss-ss-categorie"].selectDefault();
     },
     onSsSsCategorieChange: async function() {
+      this.alimentsLoading = true;
       await this.loadAliments();
+      this.alimentsLoading = false;
     },
 
     getSelectedAliments: function() {
@@ -127,7 +134,7 @@ export default {
     this.$refs["ss-categorie"].disable();
     this.$refs["ss-ss-categorie"].disable();
 
-    this.component_loading = false;
+    this.componentLoading = false;
     },
 }
 </script>
@@ -148,6 +155,24 @@ hr {
   gap: 20px;
 }
 
+.loading-aliments {
+  color: black;
+  display: flex;
+  align-items: center;
+}
+.loader {
+  border: 6px solid #f3f3f3; /* Light grey */
+  border-top: 6px solid var(--light-blue); /* Blue */
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 .counter-items-selected {
   color: black;
   display: block;
