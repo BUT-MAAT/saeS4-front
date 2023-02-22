@@ -64,12 +64,12 @@ TODO: use api to suggest and autocomplete the adress
         />
       </div>
 
-      <button id="submit-survey"
+      <Button id="submit-survey"
               type="submit"
-              @click="submitSurvey"
+              @click.native="submitSurvey"
       >
         Envoyer
-      </button>
+      </Button>
     </div>
   </form>
 </template>
@@ -223,14 +223,17 @@ form {
 #start-survey {
   width: fit-content;
 }
-
 #section-person {
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
 }
-
 #section-person > * {
   width: 48%;
+}
+
+#submit-survey {
+  display: block;
+  margin: auto;
 }
 </style>
