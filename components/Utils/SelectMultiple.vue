@@ -117,6 +117,9 @@ export default {
   color: var(--white);
   background-color: var(--dark-blue);
   padding: 4px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .item:hover {
   cursor: default;
@@ -146,6 +149,8 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  justify-content: space-between;
+  align-items: center;
 }
 .selected-item {
   border-radius: 100px;
