@@ -149,8 +149,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: space-between;
-  align-items: center;
 }
 .selected-item {
   border-radius: 100px;

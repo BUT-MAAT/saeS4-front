@@ -25,6 +25,11 @@
       />
     </div>
     <hr>
+    <span class="counter-items-selected">
+      Vous avez sélectionné
+      {{ this.$refs.selectMultiple.getSelectedItems().length }}
+      aliments
+    </span>
     <SelectMultiple
       ref="selectMultiple"
       :items="aliments"
@@ -140,5 +145,12 @@ hr {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+.counter-items-selected {
+  color: black;
+  display: block;
+  text-align: center;
+  font-size: 24px;
 }
 </style>
