@@ -91,6 +91,10 @@ export default {
 
       return true;
     },
+
+    isValid: function() {
+      return this.minToSelect <= this.selectedItems.length && this.selectedItems.length <=this.maxToSelect;
+    },
   },
 }
 </script>

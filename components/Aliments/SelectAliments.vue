@@ -26,6 +26,7 @@
     </div>
     <hr>
     <SelectMultiple
+      ref="selectMultiple"
       :items="aliments"
       display-field="nom_aliment"
       :min-to-select="10"
@@ -105,6 +106,11 @@ export default {
     },
     onSsSsCategorieChange: async function() {
       await this.loadAliments();
+    },
+
+    isValid: function() {
+      const selectMultipleComponent = this.$refs.selectMultiple;
+      return selectMultipleComponent.isValid();
     },
   },
   mounted: async function() {

@@ -127,19 +127,17 @@ export default {
         this.isStarted = true;
       }
     },
-    checkInputValid: function() {
-      const inputFirstname = this.$refs.firstname;
-      const inputLastname = this.$refs.lastname;
-      if (inputFirstname.getValue().trim() === "") return false;
-      if (inputLastname.getValue().trim() === "") return false;
-      return true;
+    checkAlimentInput: function() {
+      const selectAlimentsComponent = this.$refs.aliments;
+      return selectAlimentsComponent.isValid();
     },
     submitSurvey: function(event) {
       // event.preventDefault(); // TO REMOVE FOR SUBMITTING
-      // if (!this.checkInputValid()) {
-      //   console.log("inputs not valid");
-      //   return;
-      // }
+      if (!this.checkAlimentInput()) {
+        console.log("il faut 10 aliments");
+        event.preventDefault()
+        return;
+      }
       console.log("SUBMIT SURVEY");
     },
   }
