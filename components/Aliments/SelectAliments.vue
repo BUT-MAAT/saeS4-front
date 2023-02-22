@@ -21,12 +21,16 @@
                   display-field="nom_categorie"
                   label="Sous-sous-catégorie"
                   placeholder="-- Choisissez une sous-sous-catégorie --"
+                  :required="true"
       />
     </div>
     <hr>
     <SelectMultiple
+      ref="selectMultiple"
       :items="aliments"
       display-field="nom_aliment"
+      :min-to-select="10"
+      :max-to-select="10"
     />
   </div>
 </template>
@@ -102,6 +106,15 @@ export default {
     },
     onSsSsCategorieChange: async function() {
       await this.loadAliments();
+    },
+
+    getSelectedAliments: function() {
+      return this.$refs.selectMultiple.getSelectedItems();
+    },
+
+    isValid: function() {
+      const selectMultipleComponent = this.$refs.selectMultiple;
+      return selectMultipleComponent.isValid();
     },
   },
   mounted: async function() {

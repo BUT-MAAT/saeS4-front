@@ -1,7 +1,9 @@
 <template>
   <div class="input">
     <label :for="id">{{ label }}</label>
-    <input :id="id" :type="type" :name="name" :placeholder="placeholder" @keydown="checkCharacterAllowed" @input="valueUpdated"/>
+    <input :id="id" :type="type" :name="name" :placeholder="placeholder"
+           @keydown="checkCharacterAllowed" @input="valueUpdated"
+           :required="required"/>
   </div>
 </template>
 
@@ -25,8 +27,15 @@ export default {
       default: " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-@",
     },
     pattern: RegExp,
+    required: {
+      type: Boolean,
+      default: false,
+    }
   },
   methods: {
+    getValue: function(event) {
+      return document.getElementById(this.id).value;
+    },
     checkCharacterAllowed: function(event) {
       const whitespaces = ["Backspace", "Enter"]
       if (!(this.charactersAllowed.includes(event.key) || whitespaces.includes(event.key))) {
@@ -41,7 +50,7 @@ export default {
     },
     checkPattern: function() {
       if (this.pattern) {
-        return !!document.getElementById(this.id).value.match(this.pattern);
+        return !!this.getValue().match(this.pattern);
       }
       return true;
     },

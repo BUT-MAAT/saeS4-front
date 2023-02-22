@@ -23,42 +23,58 @@ TODO: use api to suggest and autocomplete the adress
         class="email"
         :pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
         @keydown.native="startSurvey"
+        :required="true"
       />
       <Button v-if="!isStarted"
-        id="start-survey"
-        value="Commencer"
-        @click.native="startSurvey"/>
+              id="start-survey"
+              type="button"
+              value="Commencer"
+              @click.native="startSurvey"/>
     </div>
 
     <div v-if="isStarted" class="form-content">
       <div class="form-section" id="section-person">
         <Input
           id="firstname"
+          ref="firstname"
           label="Prénom"
           name="firstname"
+          :characters-allowed="lowercaseChars + uppercaseChars + '-'"
           placeholder="Votre Prénom"
+          :required="true"
         />
         <Input
           id="lastname"
+          ref="lastname"
           label="Nom"
           name="lastname"
+          :characters-allowed="lowercaseChars + uppercaseChars + '-'"
           placeholder="Votre Nom"
+          :required="true"
         />
       </div>
 
-      <div class="form-section">
-        <LocationsInput/>
+      <div class="form-section" id="section-location">
+        <LocationsInput ref="locations"
+        />
       </div>
 
-      <div class="form-section">
-        <SelectAliments />
+      <div class="form-section" id="section-aliments">
+        <SelectAliments ref="aliments"
+        />
       </div>
+
+      <button id="submit-survey"
+              type="submit"
+              @click="submitSurvey"
+      >
+        Envoyer
+      </button>
     </div>
   </form>
 </template>
 
 <script>
-
 export default {
   name: "Survey",
   data() {
@@ -66,30 +82,89 @@ export default {
       isStarted: false,
       hasError: false,
       msgError: "",
+      lowercaseChars: "abcdefghijklmnopqrstuvwxyz",
+      uppercaseChars: "ABCDEFGHJKLMNOPQRSTUVWXYZ",
     }
   },
   methods : {
-    isEmailValid: function(event) {
+    isEmailValid: async function(event) {
       const emailInputComponent = this.$refs.emailInputComponent;
+
       if (!emailInputComponent.checkPattern()) {
         this.hasError = true;
         this.msgError = "Votre email n'est pas valide";
         return false;
       }
-      // TODO: Check email if already done the survey
+
+      const url = "http://localhost:9000/api/utils/mail_valide"
+      const email = emailInputComponent.getValue();
+      const data = (await fetch(url, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ "data": email }),
+      }).then(response => response.json()));
+      const emailValid = data.response;
+      if (!emailValid) {
+        this.hasError = true;
+        this.msgError = "Vous avez déjà fait le sondage"; // TODO : change to an information page that tells he already send the survey
+        return false;
+      }
+
       return true;
     },
-    startSurvey: function(event) {
+    startSurvey: async function(event) {
       if (event.type === "keydown") {
         if (event.key !== "Enter") return;
         event.preventDefault();
       }
 
-      if (this.isEmailValid()) {
+      if (await this.isEmailValid()) {
         const emailInput = document.getElementById("email");
         emailInput.disabled = true;
         this.isStarted = true;
       }
+    },
+    checkAlimentInput: function() {
+      const selectAlimentsComponent = this.$refs.aliments;
+      return selectAlimentsComponent.isValid();
+    },
+    submitSurvey: async function(event) {
+      //event.preventDefault(); // TO REMOVE FOR SUBMITTING
+      if (!this.checkAlimentInput()) {
+        console.log("il faut 10 aliments");
+        event.preventDefault();
+        return;
+      }
+
+      const url = "http://localhost:9000/api/sondage/create"
+      let data = {
+        "nom": this.$refs.lastname.getValue(),
+        "prenom": this.$refs.firstname.getValue(),
+        "mail": this.$refs.emailInputComponent.getValue(),
+        "adresse": this.$refs.locations.getAdress(),
+        "code_postal": this.$refs.locations.getPostalCode(),
+        "ville": this.$refs.locations.getCity(),
+        "liste_aliments" : [],
+      }
+      this.$refs.aliments.getSelectedAliments().forEach(aliment => {
+        data.liste_aliments.push({
+          "id_aliment": aliment.id_aliment,
+          "nom_aliment": aliment.nom_aliment,
+          "id_sous_sous_categorie": aliment.id_sous_sous_categorie,
+        })
+      });
+      const rep = (await fetch(url, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then(response =>  response.json()));
+
     },
   }
 }

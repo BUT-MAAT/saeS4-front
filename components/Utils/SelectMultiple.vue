@@ -45,15 +45,16 @@ export default {
   props: {
     items: Array,
     displayField: String,
+    minToSelect: Number,
+    maxToSelect: Number,
   },
   methods: {
     selectItem: function(index) {
       const item = this.items[index];
-      if (!this.isInSelectedItems(item)) {
+      if (!this.isInSelectedItems(item) && this.selectedItems.length < this.maxToSelect) {
         this.selectedItems.push(item);
       }
       else {
-        console.log(item);
         this.removeSelectedItem(item);
       }
     },
@@ -88,6 +89,14 @@ export default {
       }
 
       return true;
+    },
+
+    getSelectedItems: function() {
+      return this.selectedItems;
+    },
+
+    isValid: function() {
+      return this.minToSelect <= this.selectedItems.length && this.selectedItems.length <=this.maxToSelect;
     },
   },
 }
