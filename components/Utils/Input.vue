@@ -37,7 +37,7 @@ export default {
       return document.getElementById(this.id).value;
     },
     checkCharacterAllowed: function(event) {
-      const whitespaces = ["Backspace", "Enter"]
+      const whitespaces = ["Backspace", "Enter", "Tab", "ArrowLeft", "ArrowRight"];
       if (!(this.charactersAllowed.includes(event.key) || whitespaces.includes(event.key))) {
         event.preventDefault();
       }
