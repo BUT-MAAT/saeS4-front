@@ -23,6 +23,7 @@ TODO: use api to suggest and autocomplete the adress
         class="email"
         :pattern="/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/"
         @keydown.native="startSurvey"
+        :required="true"
       />
       <Button v-if="!isStarted"
               id="start-survey"
@@ -38,23 +39,29 @@ TODO: use api to suggest and autocomplete the adress
           ref="firstname"
           label="Prénom"
           name="firstname"
+          :characters-allowed="lowercaseChars + uppercaseChars + '-'"
           placeholder="Votre Prénom"
+          :required="true"
         />
         <Input
           id="lastname"
           ref="lastname"
           label="Nom"
           name="lastname"
+          :characters-allowed="lowercaseChars + uppercaseChars + '-'"
           placeholder="Votre Nom"
+          :required="true"
         />
       </div>
 
       <div class="form-section" id="section-location">
-        <LocationsInput ref="locations"/>
+        <LocationsInput ref="locations"
+        />
       </div>
 
       <div class="form-section" id="section-aliments">
-        <SelectAliments ref="aliments"/>
+        <SelectAliments ref="aliments"
+        />
       </div>
 
       <button id="submit-survey"
@@ -68,7 +75,6 @@ TODO: use api to suggest and autocomplete the adress
 </template>
 
 <script>
-
 export default {
   name: "Survey",
   data() {
@@ -76,6 +82,8 @@ export default {
       isStarted: false,
       hasError: false,
       msgError: "",
+      lowercaseChars: "abcdefghijklmnopqrstuvwxyz",
+      uppercaseChars: "ABCDEFGHJKLMNOPQRSTUVWXYZ",
     }
   },
   methods : {
@@ -119,16 +127,20 @@ export default {
         this.isStarted = true;
       }
     },
-    checkInputValid: function(refInput) {
-      const input = this.$refs[refInput];
-      console.log(input);ç
+    checkInputValid: function() {
+      const inputFirstname = this.$refs.firstname;
+      const inputLastname = this.$refs.lastname;
+      if (inputFirstname.getValue().trim() === "") return false;
+      if (inputLastname.getValue().trim() === "") return false;
+      return true;
     },
     submitSurvey: function(event) {
-      event.preventDefault(); // TO REMOVE FOR SUBMITTING
-      this.checkInputValid("firstname");
-      this.checkInputValid("lastname");
-      this.checkInputValid("locations");
-      this.checkInputValid("aliments");
+      // event.preventDefault(); // TO REMOVE FOR SUBMITTING
+      // if (!this.checkInputValid()) {
+      //   console.log("inputs not valid");
+      //   return;
+      // }
+      console.log("SUBMIT SURVEY");
     },
   }
 }

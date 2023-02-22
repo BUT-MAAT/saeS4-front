@@ -9,6 +9,7 @@
       :charactersAllowed="charactersAllowed"
       :pattern="pattern"
       @valueUpdated="valueUpdated"
+      :required="required"
     />
     <search-result :results=matchingPostaux @value-picked="valuePicked"></search-result>
   </div>
@@ -40,8 +41,10 @@ export default {
       required: true,
     },
     pattern: RegExp,
-  },
-  mounted() {
+    required: {
+      type: Boolean,
+      default: false,
+    }
   },
   data(){
     return {

@@ -9,6 +9,7 @@
       @valuePicked="AddressUpdated"
       :pattern="/^\d{5}$/"
       :researcher="researcher"
+      :required="true"
     />
 
     <Input
@@ -17,6 +18,7 @@
       name="city"
       placeholder="Votre Ville"
       ref="city"
+      :required="true"
     />
     <Input
       id="postal"
@@ -24,6 +26,7 @@
       name="postal"
       placeholder="Votre Code Postal"
       ref="postal"
+      :required="true"
     />
   </div>
 </template>
@@ -35,8 +38,6 @@ import AddressResearcher from "~/scripts/searchbar/AddressResearcher";
 
 export default {
   name: "LocationsInput",
-  mounted() {
-  },
   methods:{
     AddressUpdated: function(value){
       const address = this.researcher.ParseJson(value)

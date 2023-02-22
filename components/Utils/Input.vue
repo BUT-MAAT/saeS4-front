@@ -1,7 +1,9 @@
 <template>
   <div class="input">
     <label :for="id">{{ label }}</label>
-    <input :id="id" :type="type" :name="name" :placeholder="placeholder" @keydown="checkCharacterAllowed" @input="valueUpdated"/>
+    <input :id="id" :type="type" :name="name" :placeholder="placeholder"
+           @keydown="checkCharacterAllowed" @input="valueUpdated"
+           :required="required"/>
   </div>
 </template>
 
@@ -25,6 +27,10 @@ export default {
       default: " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-@",
     },
     pattern: RegExp,
+    required: {
+      type: Boolean,
+      default: false,
+    }
   },
   methods: {
     getValue: function(event) {

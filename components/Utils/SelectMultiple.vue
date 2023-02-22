@@ -45,11 +45,13 @@ export default {
   props: {
     items: Array,
     displayField: String,
+    minToSelect: Number,
+    maxToSelect: Number,
   },
   methods: {
     selectItem: function(index) {
       const item = this.items[index];
-      if (!this.isInSelectedItems(item)) {
+      if (!this.isInSelectedItems(item) && this.selectedItems.length < this.maxToSelect) {
         this.selectedItems.push(item);
       }
       else {

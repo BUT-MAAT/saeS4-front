@@ -21,12 +21,15 @@
                   display-field="nom_categorie"
                   label="Sous-sous-catégorie"
                   placeholder="-- Choisissez une sous-sous-catégorie --"
+                  :required="true"
       />
     </div>
     <hr>
     <SelectMultiple
       :items="aliments"
       display-field="nom_aliment"
+      :min-to-select="10"
+      :max-to-select="10"
     />
   </div>
 </template>
