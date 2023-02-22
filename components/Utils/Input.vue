@@ -22,10 +22,7 @@ export default {
       type: String,
       required: true,
     },
-    charactersAllowed: {
-      type: String,
-      default: " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-@",
-    },
+    charactersAllowed: String,
     pattern: RegExp,
     required: {
       type: Boolean,
@@ -37,6 +34,7 @@ export default {
       return document.getElementById(this.id).value;
     },
     checkCharacterAllowed: function(event) {
+      if (!this.charactersAllowed) return;
       const whitespaces = ["Backspace", "Enter", "Tab", "ArrowLeft", "ArrowRight"];
       if (!(this.charactersAllowed.includes(event.key) || whitespaces.includes(event.key))) {
         event.preventDefault();

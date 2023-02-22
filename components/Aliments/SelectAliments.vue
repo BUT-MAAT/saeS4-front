@@ -25,11 +25,6 @@
       />
     </div>
     <hr>
-    <span class="counter-items-selected">
-      Vous avez sélectionné
-      {{ this.$refs.selectMultiple.getSelectedItems().length }}
-      aliments
-    </span>
     <SelectMultiple
       ref="selectMultiple"
       :items="aliments"
@@ -37,6 +32,9 @@
       :min-to-select="10"
       :max-to-select="10"
     />
+    <span v-if="!component_loading" class="counter-items-selected" ref="counterItemsSelected">
+      Vous avez sélectionné {{ this.getSelectedAliments().length }} aliments
+    </span>
   </div>
 </template>
 
@@ -45,6 +43,7 @@ export default {
   name: "SelectAliments",
   data() {
     return {
+      component_loading: true,
       categories: [],
       ssCategories: [],
       ssSsCategories: [],
@@ -127,7 +126,9 @@ export default {
 
     this.$refs["ss-categorie"].disable();
     this.$refs["ss-ss-categorie"].disable();
-  },
+
+    this.component_loading = false;
+    },
 }
 </script>
 

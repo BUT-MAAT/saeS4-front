@@ -92,7 +92,7 @@ export default {
     },
 
     getSelectedItems: function() {
-      return this.selectedItems;
+      return this.selectedItems ? this.selectedItems : [];
     },
 
     isValid: function() {

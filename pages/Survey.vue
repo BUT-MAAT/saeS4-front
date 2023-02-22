@@ -39,7 +39,6 @@ TODO: use api to suggest and autocomplete the adress
           ref="firstname"
           label="Prénom"
           name="firstname"
-          :characters-allowed="lowercaseChars + uppercaseChars + '-'"
           placeholder="Votre Prénom"
           :required="true"
         />
@@ -48,7 +47,6 @@ TODO: use api to suggest and autocomplete the adress
           ref="lastname"
           label="Nom"
           name="lastname"
-          :characters-allowed="lowercaseChars + uppercaseChars + '-'"
           placeholder="Votre Nom"
           :required="true"
         />
@@ -82,8 +80,6 @@ export default {
       isStarted: false,
       hasError: false,
       msgError: "",
-      lowercaseChars: "abcdefghijklmnopqrstuvwxyz",
-      uppercaseChars: "ABCDEFGHJKLMNOPQRSTUVWXYZ",
     }
   },
   methods : {
