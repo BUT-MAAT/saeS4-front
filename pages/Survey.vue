@@ -137,12 +137,12 @@ export default {
 
       const url = "http://localhost:9000/api/sondage/create"
       let data = {
-        "nom": this.$refs.lastname.getValue(),
-        "prenom": this.$refs.firstname.getValue(),
-        "mail": this.$refs.emailInputComponent.getValue(),
-        "adresse": this.$refs.locations.getAdress(),
-        "code_postal": this.$refs.locations.getPostalCode(),
-        "ville": this.$refs.locations.getCity(),
+        "nom": this.$refs.lastname.getValue().trim().toLowerCase().capitalize(),
+        "prenom": this.$refs.firstname.getValue().toLowerCase().capitalize(),
+        "mail": this.$refs.emailInputComponent.getValue().trim(),
+        "adresse": this.$refs.locations.getAdress().trim(),
+        "code_postal": this.$refs.locations.getPostalCode().trim(),
+        "ville": this.$refs.locations.getCity().trim(),
         "liste_aliments" : [],
       }
       this.$refs.aliments.getSelectedAliments().forEach(aliment => {
