@@ -44,7 +44,17 @@ export default {
       this.$refs.address.setValue(address.street)
       this.$refs.city.setValue(address.city)
       this.$refs.postal.setValue(address.postal)
-    }
+    },
+
+    getAdress: function() {
+      return this.$refs.address.getValue();
+    },
+    getPostalCode: function() {
+      return this.$refs.postal.getValue();
+    },
+    getCity: function() {
+      return this.$refs.city.getValue();
+    },
 
   },
   data(){

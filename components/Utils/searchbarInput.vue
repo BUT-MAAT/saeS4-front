@@ -80,6 +80,10 @@ export default {
       this.$emit("valuePicked",value)
       this.matchingPostaux = []
     },
+
+    getValue() {
+      return this.$refs.input.getValue();
+    },
   },
 }
 </script>

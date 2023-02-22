@@ -108,6 +108,10 @@ export default {
       await this.loadAliments();
     },
 
+    getSelectedAliments: function() {
+      return this.$refs.selectMultiple.getSelectedItems();
+    },
+
     isValid: function() {
       const selectMultipleComponent = this.$refs.selectMultiple;
       return selectMultipleComponent.isValid();

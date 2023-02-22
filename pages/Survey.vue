@@ -131,14 +131,40 @@ export default {
       const selectAlimentsComponent = this.$refs.aliments;
       return selectAlimentsComponent.isValid();
     },
-    submitSurvey: function(event) {
-      // event.preventDefault(); // TO REMOVE FOR SUBMITTING
+    submitSurvey: async function(event) {
+      //event.preventDefault(); // TO REMOVE FOR SUBMITTING
       if (!this.checkAlimentInput()) {
         console.log("il faut 10 aliments");
-        event.preventDefault()
+        event.preventDefault();
         return;
       }
-      console.log("SUBMIT SURVEY");
+
+      const url = "http://localhost:9000/api/sondage/create"
+      let data = {
+        "nom": this.$refs.lastname.getValue(),
+        "prenom": this.$refs.firstname.getValue(),
+        "mail": this.$refs.emailInputComponent.getValue(),
+        "adresse": this.$refs.locations.getAdress(),
+        "code_postal": this.$refs.locations.getPostalCode(),
+        "ville": this.$refs.locations.getCity(),
+        "liste_aliments" : [],
+      }
+      this.$refs.aliments.getSelectedAliments().forEach(aliment => {
+        data.liste_aliments.push({
+          "id_aliment": aliment.id_aliment,
+          "nom_aliment": aliment.nom_aliment,
+          "id_sous_sous_categorie": aliment.id_sous_sous_categorie,
+        })
+      });
+      const rep = (await fetch(url, {
+        method: "POST",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }).then(response =>  response.json()));
+
     },
   }
 }

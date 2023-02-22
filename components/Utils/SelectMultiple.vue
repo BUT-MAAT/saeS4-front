@@ -55,7 +55,6 @@ export default {
         this.selectedItems.push(item);
       }
       else {
-        console.log(item);
         this.removeSelectedItem(item);
       }
     },
@@ -90,6 +89,10 @@ export default {
       }
 
       return true;
+    },
+
+    getSelectedItems: function() {
+      return this.selectedItems;
     },
 
     isValid: function() {
