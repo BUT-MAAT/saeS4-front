@@ -26,7 +26,15 @@ export default {
 </script>
 
 <style scoped>
-ul{
+.searchResult {
+  background-color: var(--white);
+  border: 2px solid var(--dark-blue);
+  border-radius: 5px;
+  max-height: 100px;
+  overflow-y: scroll;
+}
+ul {
   color:black;
+  list-style: none;
 }
 </style>

@@ -11,7 +11,10 @@
       @valueUpdated="valueUpdated"
       :required="required"
     />
-    <search-result :results=matchingPostaux @value-picked="valuePicked"></search-result>
+    <search-result v-if="matchingPostaux.length > 0"
+                   :results="matchingPostaux"
+                   @value-picked="valuePicked"
+    />
   </div>
 </template>
 
@@ -36,7 +39,7 @@ export default {
       type: String,
       default: " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-@",
     },
-    researcher:{
+    researcher: {
       type: IResearcher,
       required: true,
     },
@@ -57,7 +60,7 @@ export default {
      * @param value the input's value
      */
     valueUpdated: function(value){
-      this.researcher.getSearchResult(value).then(res =>{
+      this.researcher.getSearchResult(value).then(res => {
         this.matchingPostaux = res
       })
         .catch(reason => {});

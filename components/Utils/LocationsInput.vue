@@ -59,7 +59,7 @@ export default {
   },
   data(){
     return{
-      researcher:new AddressResearcher()
+      researcher: new AddressResearcher()
     }
   },
 }
