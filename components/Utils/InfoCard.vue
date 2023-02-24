@@ -11,10 +11,13 @@
 
     <div class="modal" v-if="isModalOpen">
       <div class="modal-content">
-              <span class="close-modal" @click="closeInfoModal">
-        <IconClose />
-      </span>
-        <p>INFO MODAL</p>
+        <span class="close-modal">
+          <IconClose class="close-modal-icon" @click.native="closeInfoModal"/>
+        </span>
+
+        <span v-for="(infoValue, infoName) in infos">
+          {{ infoName }} : {{ infoValue }} <br>
+        </span>
       </div>
     </div>
   </div>
@@ -76,16 +79,27 @@ export default {
   align-items: center;
 }
 .modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   background-color: var(--white);
   margin: auto;
   padding: 20px;
   border-radius: 20px;
   width: 60%;
+  height: 60%;
+  overflow: scroll;
   color: black;
 }
 .close-modal {
-  float: right;
+  position: absolute;
+  right: 4vh;
 }
+
+.close-modal-icon {
+  position: fixed;
+}
+
 .close-modal:hover {
   cursor: pointer;
 }
