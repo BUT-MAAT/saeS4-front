@@ -123,12 +123,29 @@ export default {
         this.isStarted = true;
       }
     },
+    checkInputs: function() {
+      const emailInput = this.$refs.emailInputComponent;
+      const firstnameInput = this.$refs.firstname;
+      const lastnameInput = this.$refs.lastname;
+      const locationInput = this.$refs.locations;
+      locationInput.checkErrors();
+      lastnameInput.checkErrors();
+      firstnameInput.checkErrors();
+      emailInput.checkErrors();
+      return emailInput.isValid() && firstnameInput.isValid() && lastnameInput.isValid() && locationInput.isValid();
+    },
     checkAlimentInput: function() {
       const selectAlimentsComponent = this.$refs.aliments;
       return selectAlimentsComponent.isValid();
     },
     submitSurvey: async function(event) {
       //event.preventDefault(); // TO REMOVE FOR SUBMITTING
+      if (!this.checkInputs()) {
+        console.log("erreur input");
+        event.preventDefault();
+        return;
+      }
+
       if (!this.checkAlimentInput()) {
         console.log("il faut 10 aliments");
         event.preventDefault();
@@ -221,7 +238,9 @@ form {
 #section-person > * {
   width: 48%;
 }
-
+#section-location >>> .input:nth-child(2) {
+  margin: 20px 0;
+}
 #submit-survey {
   display: block;
   margin: auto;

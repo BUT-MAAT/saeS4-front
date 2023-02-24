@@ -35,10 +35,7 @@ export default {
       type: String,
       required: true,
     },
-    charactersAllowed: {
-      type: String,
-      default: " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-@",
-    },
+    charactersAllowed: String,
     researcher: {
       type: IResearcher,
       required: true,
@@ -86,6 +83,15 @@ export default {
 
     getValue() {
       return this.$refs.input.getValue();
+    },
+
+    isValid: function() {
+      const input = this.$refs.input;
+      return input.isValid();
+    },
+    checkErrors: function() {
+      const input = this.$refs.input;
+      input.checkErrors();
     },
   },
 }
