@@ -15,7 +15,9 @@
           <IconClose class="close-modal-icon" @click.native="closeInfoModal"/>
         </span>
 
-        <span v-for="(infoValue, infoName) in infos">
+        <span v-for="(infoValue, infoName) in infos"
+              v-if="infoValue"
+        >
           {{ infoName }} : {{ infoValue }} <br>
         </span>
       </div>
@@ -82,14 +84,19 @@ export default {
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  gap: 4px;
   background-color: var(--white);
   margin: auto;
   padding: 20px;
   border-radius: 20px;
-  width: 60%;
-  height: 60%;
+  width: fit-content;
+  min-width: 20%;
+  max-width: 60%;
+  max-height: 60%;
   overflow: scroll;
   color: black;
+  font-size: 18px;
 }
 .close-modal {
   position: absolute;

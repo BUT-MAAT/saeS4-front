@@ -39,6 +39,38 @@
 </template>
 
 <script>
+  const infosLabels = [
+    "energie_ue_kj",
+    "energie_ue_kcal",
+    "eau",
+    "glucides",
+    "lipides",
+    "sucres",
+    "fructose",
+    "glucose",
+    "lactose",
+    "maltose",
+    "saccharos",
+    "amidon",
+    "fibres_alimentaires",
+    "alcool",
+    "sel",
+    "calcium",
+    "fer",
+    "magnesium",
+    "potassium",
+    "sodium",
+    "zinc",
+    "vitamine_D",
+    "vitamine_E",
+    "vitamine_K1",
+    "vitamine_K2",
+    "vitamine_C",
+    "vitamine_B1",
+    "vitamine_B2",
+    "vitamine_b3",
+    "vitamine_b5",
+  ];
 export default {
   name: "SelectAliments",
   data() {
@@ -48,6 +80,8 @@ export default {
       ssCategories: [],
       ssSsCategories: [],
       aliments: [],
+
+      infosLabels: infosLabels,
     }
   },
   methods: {
@@ -84,8 +118,15 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           data.forEach(aliment => {
-            aliment.infos = aliment.valeurs_nutritives;
+            let infosToKeep = {};
+            for (let key in aliment.valeurs_nutritives) {
+              if (this.infosLabels.includes(key) && Object.keys(aliment.valeurs_nutritives).includes(key)) {
+                infosToKeep[key] = aliment.valeurs_nutritives[key];
+              }
+            }
+            aliment.infos = infosToKeep;
           });
+          console.log(data);
           this.aliments = data;
         });
     },
