@@ -14,7 +14,7 @@
         <span class="close-modal">
           <IconClose class="close-modal-icon" @click.native="closeInfoModal"/>
         </span>
-
+        <span class="modal-title">{{ name }}</span>
         <span v-for="(infoValue, infoName) in infos"
               v-if="infoValue"
         >
@@ -29,6 +29,7 @@
 export default {
   name: "InfoCard",
   props: {
+    name: String,
     infos: Object,
   },
   data() {
@@ -88,7 +89,7 @@ export default {
   gap: 4px;
   background-color: var(--white);
   margin: auto;
-  padding: 20px;
+  padding: 20px 40px;
   border-radius: 20px;
   width: fit-content;
   min-width: 20%;
@@ -97,6 +98,10 @@ export default {
   overflow: scroll;
   color: black;
   font-size: 18px;
+}
+.modal-title {
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 .close-modal {
   position: absolute;

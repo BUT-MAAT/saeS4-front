@@ -5,6 +5,7 @@
       <InfoCard class="item"
                 v-else
                 v-for="(item, index) in items"
+                :name="item[displayField]"
                 :infos="item.infos"
                 :class="{ 'disabled-item': isInSelectedItems(item) }"
       >
@@ -22,6 +23,7 @@
       <div class="selected-items">
         <InfoCard class="selected-item"
                   v-for="(item, index) in selectedItems"
+                  :name="item[displayField]"
                   :infos="item.infos"
         >
           <span>{{ item[displayField] }}</span>
