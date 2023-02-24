@@ -25,10 +25,6 @@
       />
     </div>
     <hr>
-    <div class="loading-aliments" v-if="alimentsLoading">
-      <span>CHARGEMENT DES ALIMENTS...</span>
-      <div class="loader"></div>
-    </div>
     <SelectMultiple
       ref="selectMultiple"
       :items="aliments"
@@ -48,7 +44,6 @@ export default {
   data() {
     return {
       componentLoading: true,
-      alimentsLoading: false,
       categories: [],
       ssCategories: [],
       ssSsCategories: [],
@@ -114,9 +109,9 @@ export default {
       this.$refs["ss-ss-categorie"].selectDefault();
     },
     onSsSsCategorieChange: async function() {
-      this.alimentsLoading = true;
+      this.$refs.selectMultiple.startLoadingItems();
       await this.loadAliments();
-      this.alimentsLoading = false;
+      this.$refs.selectMultiple.stopLoadingItems();
     },
 
     getSelectedAliments: function() {
@@ -155,24 +150,6 @@ hr {
   gap: 20px;
 }
 
-.loading-aliments {
-  color: black;
-  display: flex;
-  align-items: center;
-}
-.loader {
-  border: 6px solid #f3f3f3; /* Light grey */
-  border-top: 6px solid var(--light-blue); /* Blue */
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  animation: spin 2s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
 .counter-items-selected {
   color: black;
   display: block;

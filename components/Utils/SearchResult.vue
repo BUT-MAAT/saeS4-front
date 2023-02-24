@@ -37,4 +37,7 @@ ul {
   color:black;
   list-style: none;
 }
+li:hover {
+  cursor: pointer;
+}
 </style>

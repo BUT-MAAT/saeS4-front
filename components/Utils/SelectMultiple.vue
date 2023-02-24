@@ -1,7 +1,9 @@
 <template>
   <div class="select-multiple">
     <div class="items-available">
+      <div class="loader" v-if="loading"></div>
       <InfoCard class="item"
+                v-else
                 v-for="(item, index) in items"
                 :class="{ 'disabled-item': isInSelectedItems(item) }"
       >
@@ -40,6 +42,7 @@ export default {
   data() {
     return {
       selectedItems: [],
+      loading: false,
     }
   },
   props: {
@@ -49,6 +52,12 @@ export default {
     maxToSelect: Number,
   },
   methods: {
+    startLoadingItems: function() {
+      this.loading = true;
+    },
+    stopLoadingItems: function() {
+      this.loading = false;
+    },
     selectItem: function(index) {
       const item = this.items[index];
       if (!this.isInSelectedItems(item) && this.selectedItems.length < this.maxToSelect) {
@@ -104,6 +113,7 @@ export default {
 
 <style scoped>
 .items-available {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -174,5 +184,21 @@ export default {
   fill: black;
   width: 16px;
   height: auto;
+}
+
+.loader {
+  justify-self: center;
+  margin: auto;
+  border: 12px solid #c3c3c3; /* Light grey */
+  border-top: 12px solid var(--light-blue);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 1s cubic-bezier(1, 0, 0.4, 1) infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>
