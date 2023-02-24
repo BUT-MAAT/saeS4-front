@@ -128,11 +128,17 @@ export default {
       const firstnameInput = this.$refs.firstname;
       const lastnameInput = this.$refs.lastname;
       const locationInput = this.$refs.locations;
+      const alimentsSelect = this.$refs.aliments;
+      alimentsSelect.checkErrors();
       locationInput.checkErrors();
       lastnameInput.checkErrors();
       firstnameInput.checkErrors();
       emailInput.checkErrors();
-      return emailInput.isValid() && firstnameInput.isValid() && lastnameInput.isValid() && locationInput.isValid();
+      return emailInput.isValid()
+        && firstnameInput.isValid()
+        && lastnameInput.isValid()
+        && locationInput.isValid()
+        && alimentsSelect.isValid();
     },
     checkAlimentInput: function() {
       const selectAlimentsComponent = this.$refs.aliments;

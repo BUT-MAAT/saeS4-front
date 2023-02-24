@@ -1,5 +1,7 @@
 <template>
-  <div class="menu">
+  <div class="menu" :class="{ 'error': hasError}">
+    <span class="label">Veuillez choisir 10 aliments</span>
+    <span v-if="hasError" class="error-text">Champ invalide</span>
     <div class="filters">
       <ScrollList ref="categorie"
                   @change.native="onCategorieChange"
@@ -82,6 +84,8 @@ export default {
       aliments: [],
 
       infosLabels: infosLabels,
+
+      hasError: false,
     }
   },
   methods: {
@@ -170,6 +174,16 @@ export default {
       const selectMultipleComponent = this.$refs.selectMultiple;
       return selectMultipleComponent.isValid();
     },
+    checkErrors: function() {
+      this.hasError = !this.isValid();
+      if (this.hasError) this.scrollToMe();
+    },
+    scrollToMe: function() {
+      const el = this.$refs.input;
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" })
+      }
+    },
   },
   mounted: async function() {
     await this.loadCategories();
@@ -188,10 +202,17 @@ hr {
   margin: 20px 0;
 }
 
+.label {
+  color: var(--dark-blue);
+  display: block;
+  text-align: center;
+  font-size: 24px;
+}
 .menu {
   background-color: var(--white);
   border-radius: 10px;
   padding: 40px;
+  border: 3px solid var(--white);
 }
 .filters {
   display: flex;
@@ -204,5 +225,16 @@ hr {
   display: block;
   text-align: center;
   font-size: 24px;
+}
+
+.error {
+  border: 3px solid var(--error);
+}
+.error-text {
+  color: var(--error);
+  display: block;
+  text-align: center;
+  font-size: 18px;
+
 }
 </style>
