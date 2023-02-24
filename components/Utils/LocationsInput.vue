@@ -7,7 +7,6 @@
       placeholder="Votre Adresse"
       ref="address"
       @valuePicked="AddressUpdated"
-      :pattern="/^\d{5}$/"
       :researcher="researcher"
       :required="true"
     />

@@ -7,7 +7,6 @@
       :placeholder="placeholder"
       ref="input"
       :charactersAllowed="charactersAllowed"
-      :pattern="pattern"
       @valueUpdated="valueUpdated"
       :required="required"
     />

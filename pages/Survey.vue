@@ -160,8 +160,8 @@ export default {
 
       const url = "http://localhost:9000/api/sondage/create"
       let data = {
-        "nom": this.$refs.lastname.getValue().trim().toLowerCase().capitalize(),
-        "prenom": this.$refs.firstname.getValue().toLowerCase().capitalize(),
+        "nom": this.$refs.lastname.getValue().trim().toLowerCase(),
+        "prenom": this.$refs.firstname.getValue().toLowerCase(),
         "mail": this.$refs.emailInputComponent.getValue().trim(),
         "adresse": this.$refs.locations.getAdress().trim(),
         "code_postal": this.$refs.locations.getPostalCode().trim(),
