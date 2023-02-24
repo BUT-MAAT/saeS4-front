@@ -2,6 +2,7 @@
   <div class="card">
     <span class="info"
           @click="revealInfo"
+          v-if="hasInfo()"
     >
       <IconInfo class="info-icon"/>
     </span>
@@ -13,9 +14,12 @@
 export default {
   name: "InfoCard",
   props: {
-
+    infos: [],
   },
   methods: {
+    hasInfo: function() {
+      return this.infos ? this.infos.length > 0 : false;
+    },
     revealInfo: function() {
       console.log("INFO");
     },
