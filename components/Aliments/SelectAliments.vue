@@ -33,7 +33,7 @@
       :max-to-select="10"
     />
     <span v-if="!componentLoading" class="counter-items-selected" ref="counterItemsSelected">
-      Vous avez sélectionné {{ this.getSelectedAliments().length }} aliments
+      Vous avez sélectionné {{ this.getSelectedAliments().length }} sur {{ this.getMaxAliments() }} aliments
     </span>
   </div>
 </template>
@@ -116,6 +116,9 @@ export default {
 
     getSelectedAliments: function() {
       return this.$refs.selectMultiple.getSelectedItems();
+    },
+    getMaxAliments: function() {
+      return this.$refs.selectMultiple.maxToSelect;
     },
 
     isValid: function() {
