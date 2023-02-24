@@ -61,7 +61,7 @@ export default {
 select {
   height: 48px;
   border-radius: 10px;
-  border: 2px solid var(--light-blue);
+  border: 2px solid var(--dark-blue);
   font-size: 16px;
 }
 label {

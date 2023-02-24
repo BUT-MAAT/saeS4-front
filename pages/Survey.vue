@@ -173,12 +173,6 @@ form {
   margin: 40px auto;
 }
 
-.form-content {
-  background-color: var(--dark-blue);
-  padding: 40px;
-  border-radius: 10px;
-}
-
 .form-section {
   display: flex;
   flex-direction: column;

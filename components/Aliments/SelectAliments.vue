@@ -149,6 +149,7 @@ hr {
 
 .menu {
   background-color: var(--white);
+  border-radius: 10px;
   padding: 40px;
 }
 .filters {
