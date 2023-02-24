@@ -14,14 +14,14 @@
 export default {
   name: "InfoCard",
   props: {
-    infos: [],
+    infos: Object,
   },
   methods: {
     hasInfo: function() {
-      return this.infos ? this.infos.length > 0 : false;
+      return this.infos ? Object.keys(this.infos).length > 0 : false;
     },
     revealInfo: function() {
-      console.log("INFO");
+      console.log(this.infos);
     },
   },
 }

@@ -83,6 +83,9 @@ export default {
       return fetch(url)
         .then((response) => response.json())
         .then((data) => {
+          data.forEach(aliment => {
+            aliment.infos = aliment.valeurs_nutritives;
+          });
           this.aliments = data;
         });
     },
@@ -111,6 +114,7 @@ export default {
     onSsSsCategorieChange: async function() {
       this.$refs.selectMultiple.startLoadingItems();
       await this.loadAliments();
+      console.log(this.aliments);
       this.$refs.selectMultiple.stopLoadingItems();
     },
 
