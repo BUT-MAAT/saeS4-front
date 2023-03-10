@@ -4,15 +4,11 @@ class AddressResearcher extends  researcher{
 
   constructor() {
     super();
-    this.api = "https://api-adresse.data.gouv.fr/search/?q="
+    this.api = "http://localhost:9000/api/address/getaddress/"
   }
 
   getSearchResult(comparator){
     return new Promise((resolve, reject) => {
-      if(comparator.includes('  ') || str == " " || comparator.replaceAll(" ","").length <3){
-        reject("Chaine de caractère trop courte")
-        return
-      }
 
       let str = comparator.trim().replaceAll(" ","+");
       let url = this.api+str;
@@ -40,10 +36,9 @@ class AddressResearcher extends  researcher{
     return JSON.parse(template)
   }
   static parseResult(response){
-    let data = response.features
     let results = []
-    data.forEach(element => {
-      results.push(element.properties.label)
+    response.forEach(element => {
+      results.push(element.label)
     })
     return results
   }
