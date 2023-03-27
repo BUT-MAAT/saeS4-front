@@ -1,9 +1,6 @@
 <template>
 <div class="map-result">
   <svg xmlns="http://www.w3.org/2000/svg" width="907" height="1000">
-    <g fill="none" stroke="#86aae0" stroke-width="1.5">
-      <path id="corsica_separating_line" d="M783 1e3v-130l119-78"/>
-    </g>
     <g fill="#8ad" stroke="#fff" stroke-width=".5">
       <path id="20" @click="getAliments" d="M808 896v3l3 3 6 4 1 3-4 1-5 1v2l2 2 0 8 8 2 3 1 2 4-2 2-2 1-3 4-2 3 1 6 6 0 1 1 5-2 2 1-3 6 3 2-5 3-2 7 8 2 11 1-5 5s-2-1-3-1v1c0 2-3 6-3 7l4 3 6 4 12 4 4 1 3 2-2 3 6 0 1 3h5l2-7-4-1 5-5-1-2 0-3 7-4 0-4-4 0-3 2v-4l5 0 2-4 2-13-1-5v-5l-7 4-7 0-1-5 1-1-2-2-1-9-1-2h-4l-2-1v-6l-2-2-2-1-4-5 0-3h-5l-2-5h-6l-4-4 1-2-2-1-5 0-2-1h-8l0-2-4 0h-3z"/>
       <path id="20 " @click="getAliments" d="M868 823l-5 4 0 4 3 3-3 3 1 3-2 2v3l4 4v5l-2 4-3 1-3-3-5 0-1-1h-4l-4 4-2 6-9 2-7 6-2 4-3-1-2-2-1 6-3 1 0 6 1 3-4 3-1 3 4 0 0 2h7l2 1 6 0 2 1-1 2 4 4h6l2 5h5l0 3 3 5 3 1 2 2v6l2 2h4l1 1 1 9 2 2-1 1 1 5 7 0 7-4-1-11 9-12v-20l-4-7-1-22-2-4-5-4-1-13 2-6-2-10-2-8-2-2-3-2z"/>
@@ -103,24 +100,46 @@
       <path id="90" @click="getAliments" d="M819 336l-3 2-3 2v5l1 5v4l0 5-2 2 22 11 1-2 5-1-2-8-1-4-5 1-1-4 2-4 0-4-1-2-6-5-6-1-1-2z"/>
     </g>
   </svg>
+
+  <AlimentList :aliments="aliments" />
+  <search-result :results=aliments ></search-result>
 </div>
+
 </template>
 
 <script>
+import Vue from 'vue';
 export default {
+
   name: "ResultMap",
+  data() {
+    return {
+      aliments: [],
+    }
+  },
   methods: {
     getAliments: function (event) {
-      console.log("fezfezfzfez");
       const id = (event.target.getAttribute("id")).trim();
       console.log(id)
-      // fetch(`http://localhost:9000/api/statistiques/MostConsumedByDepartment/${id}?size=10`).then(data => console.log(data))
-    }
+      this.loadAliments(id,10)
+      console.log(this.aliments)
+    },
+    loadAliments: function(id,size) {
+      const url =`http://localhost:9000/api/statistiques/MostConsumedByDepartment/${id}?size=${size}`;
+
+      return fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+          this.aliments = data;
+        });
+    },
   }
 }
 
 </script>
 
 <style scoped>
-
+path:hover{
+  fill: rebeccapurple;
+}
 </style>
