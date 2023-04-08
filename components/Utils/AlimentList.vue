@@ -1,11 +1,12 @@
 <template>
-  <div class="AlimentList">
-    <h1 >Liste des aliments les plus consommés pour le {{ this.id }}</h1>
-    <ul>
-      <li v-for="(result,index) in aliments" :key="index">
+  <div class="AlimentContainer">
+    <h3>Liste des aliments les plus consommés pour le {{ this.id }}</h3>
+    <ul v-if="aliments.length !== 0" ref='AlimentList' @scroll="handleScroll">
+      <li  v-for="(result,index) in aliments" :key="index">
         {{ result.nom_aliment }} ({{ result.nbChoisi }})
       </li>
     </ul>
+    <h3 class="no-data" v-else>Aucune donnée disponible pour le moment</h3>
   </div>
 </template>
 
@@ -19,23 +20,35 @@ export default {
     },
     id: []
   },
+  methods: {
+    handleScroll : function (event){
+      // event.target.scrollTop = 0
+      this.$emit("scrollAliment",event.target.scrollTop)
+    },
+    setScroll: function (scroll){
+      let element = this.$refs.AlimentList
+      element.scrollTop = scroll
+    }
+  }
 }
 
 </script>
 
 <style scoped>
-.AlimentList{
-  background-color: #C8F24F;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  flex-direction: column;
-  height: 30vh;
+.AlimentContainer{
+  background-color: #2c2c7c;
+  width: 40vw;
 }
-.AlimentList h1{
-  height: 5vh;
+.AlimentContainer h3{
+  padding: 10px 0 10px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items:center ;
 }
 ul{
+  height: 30vh;
   margin: 0;
   padding: 0;
   display: block;
@@ -44,9 +57,13 @@ ul{
   align-content: center;
   flex-direction: column;
   overflow-x: hidden;
-  height: 25vh;
   overflow-y: auto;
 
+}
+.no-data{
+  height: 30vh;
+  justify-content: center;
+  color: #ffffff;
 }
 li {
   list-style-type: none;
@@ -54,7 +71,7 @@ li {
   display: flex;
   text-align: center;
   justify-content: center;
-  height: 15%;
+  height: 25%;
   align-items: center;
   /*padding: 0px 10px 0px 10px;*/
   color: #ffffff;
@@ -62,9 +79,9 @@ li {
 
 
 li:nth-child(even){
-  background-color: var(--dark-blue);
+  background-color: #7d7dff;
 }
 li:nth-child(odd){
-  background-color: var(--light-blue);
+  background-color: #313188;
 }
 </style>
