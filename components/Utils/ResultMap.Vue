@@ -210,7 +210,7 @@ path:hover{
   justify-content: center;
 }
 svg{
-  width: 80%;
+  width: 35%;
   height: auto;
   transform: translateX(-10%);
 }
