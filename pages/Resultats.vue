@@ -43,7 +43,7 @@ import RoundTranslationElement from "../components/Utils/RoundTranslationElement
 import Aliment from "../components/Utils/AlimentList.vue";
 
 export default {
-  name: "Test.vue",
+  name: "Resultats",
   components: {Aliment, RoundTranslationElement, ResultMap},
   mounted() {
     const url = "http://localhost:9000/api/statistiques/"

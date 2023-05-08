@@ -1,5 +1,5 @@
 <template>
-  <div ref='card' @mousemove="handleHover" @mouseleave="resetStyle" :style="{ backgroundColor: backColor }" class="round text flex-align-column">
+  <div ref='card' @mousemove="handleHover" @mouseleave="resetStyle" :style="{ backgroundColor: backColor }"  class="round text flex-align-column">
       <div :style="{ color: textColor }" class="text-content normalText flex-align-column">{{text[0]}}</div>
       <div :style="{ color: highlightTextColor }" class="text-content highlight flex-align-column">{{highltightedText}}</div>
       <div :style="{ color: textColor }" class="text-content normalText flex-align-column">{{text[1]}}</div>
@@ -13,7 +13,7 @@ export default {
     label: String,
     backColor: {
       type: String,
-      default: "#ff0000", //TODO regex for back-color
+      default: "#C43B3BFF", //TODO regex for back-color
     },
     textColor: {
       type: String,
@@ -21,7 +21,7 @@ export default {
     },
     highlightTextColor: {
       type: String,
-      default: "#004DFFFF", //TODO regex for back-color
+      default: "#335abe", //TODO regex for back-color
     },
     text:{
       type:Array, //TODO voir si on peut limiter la longueur
@@ -62,8 +62,8 @@ export default {
 
 <style scoped>
 .round{
-  width: 40vw;
-  height: 40vw;
+  width: 20vw;
+  height: 20vw;
   border-radius: 50%;
   transform-style: preserve-3d;
 
@@ -76,12 +76,12 @@ export default {
  .text-content {
    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
   width: 80%;
-  font-size: calc(1vw + 1vh);
+  font-size: calc(1.5vw);
   text-align: center;
   height: auto;
 }
 .text .highlight{
-  font-size: calc(1.8vw + 1.8vh);
+  font-size: calc(1.8vw);
   font-weight: bold;
 }
 .flex-align-column{
@@ -91,5 +91,7 @@ export default {
   align-items: center;
 
 }
+@media only screen and (max-width: 900px) {
 
+}
 </style>
