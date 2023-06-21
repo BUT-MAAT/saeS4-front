@@ -29,6 +29,16 @@
       >Tourisme</NavBarItem>
       <NavBarItem
         class="navbar-item"
+        to="/survey"
+        isActive="true"
+      >Sondage</NavBarItem>
+      <NavBarItem
+        class="navbar-item"
+        to="/resultats"
+        isActive="true"
+      >Résultats</NavBarItem>
+      <NavBarItem
+        class="navbar-item"
         to="/contact"
       >Contact</NavBarItem>
     </div>
