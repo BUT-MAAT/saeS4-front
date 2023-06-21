@@ -39,7 +39,6 @@ TODO: use api to suggest and autocomplete the adress
           ref="firstname"
           label="Prénom"
           name="firstname"
-          :characters-allowed="lowercaseChars + uppercaseChars + '-'"
           placeholder="Votre Prénom"
           :required="true"
         />
@@ -48,7 +47,6 @@ TODO: use api to suggest and autocomplete the adress
           ref="lastname"
           label="Nom"
           name="lastname"
-          :characters-allowed="lowercaseChars + uppercaseChars + '-'"
           placeholder="Votre Nom"
           :required="true"
         />
@@ -64,12 +62,12 @@ TODO: use api to suggest and autocomplete the adress
         />
       </div>
 
-      <button id="submit-survey"
+      <Button id="submit-survey"
               type="submit"
-              @click="submitSurvey"
+              @click.native="submitSurvey"
       >
         Envoyer
-      </button>
+      </Button>
     </div>
   </form>
 </template>
@@ -82,8 +80,6 @@ export default {
       isStarted: false,
       hasError: false,
       msgError: "",
-      lowercaseChars: "abcdefghijklmnopqrstuvwxyz",
-      uppercaseChars: "ABCDEFGHJKLMNOPQRSTUVWXYZ",
     }
   },
   methods : {
@@ -127,12 +123,35 @@ export default {
         this.isStarted = true;
       }
     },
+    checkInputs: function() {
+      const emailInput = this.$refs.emailInputComponent;
+      const firstnameInput = this.$refs.firstname;
+      const lastnameInput = this.$refs.lastname;
+      const locationInput = this.$refs.locations;
+      const alimentsSelect = this.$refs.aliments;
+      alimentsSelect.checkErrors();
+      locationInput.checkErrors();
+      lastnameInput.checkErrors();
+      firstnameInput.checkErrors();
+      emailInput.checkErrors();
+      return emailInput.isValid()
+        && firstnameInput.isValid()
+        && lastnameInput.isValid()
+        && locationInput.isValid()
+        && alimentsSelect.isValid();
+    },
     checkAlimentInput: function() {
       const selectAlimentsComponent = this.$refs.aliments;
       return selectAlimentsComponent.isValid();
     },
     submitSurvey: async function(event) {
       //event.preventDefault(); // TO REMOVE FOR SUBMITTING
+      if (!this.checkInputs()) {
+        console.log("erreur input");
+        event.preventDefault();
+        return;
+      }
+
       if (!this.checkAlimentInput()) {
         console.log("il faut 10 aliments");
         event.preventDefault();
@@ -141,12 +160,12 @@ export default {
 
       const url = "http://localhost:9000/api/sondage/create"
       let data = {
-        "nom": this.$refs.lastname.getValue(),
-        "prenom": this.$refs.firstname.getValue(),
-        "mail": this.$refs.emailInputComponent.getValue(),
-        "adresse": this.$refs.locations.getAdress(),
-        "code_postal": this.$refs.locations.getPostalCode(),
-        "ville": this.$refs.locations.getCity(),
+        "nom": this.$refs.lastname.getValue().trim().toLowerCase(),
+        "prenom": this.$refs.firstname.getValue().toLowerCase(),
+        "mail": this.$refs.emailInputComponent.getValue().trim(),
+        "adresse": this.$refs.locations.getAdress().trim(),
+        "code_postal": this.$refs.locations.getPostalCode().trim(),
+        "ville": this.$refs.locations.getCity().trim(),
         "liste_aliments" : [],
       }
       this.$refs.aliments.getSelectedAliments().forEach(aliment => {
@@ -175,12 +194,6 @@ export default {
 form {
   width: 80%;
   margin: 40px auto;
-}
-
-.form-content {
-  background-color: var(--dark-blue);
-  padding: 40px;
-  border-radius: 10px;
 }
 
 .form-section {
@@ -223,14 +236,19 @@ form {
 #start-survey {
   width: fit-content;
 }
-
 #section-person {
   width: 100%;
   flex-direction: row;
   justify-content: space-between;
 }
-
 #section-person > * {
   width: 48%;
+}
+#section-location >>> .input:nth-child(2) {
+  margin: 20px 0;
+}
+#submit-survey {
+  display: block;
+  margin: auto;
 }
 </style>

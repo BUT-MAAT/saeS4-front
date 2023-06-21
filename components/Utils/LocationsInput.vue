@@ -7,7 +7,6 @@
       placeholder="Votre Adresse"
       ref="address"
       @valuePicked="AddressUpdated"
-      :pattern="/^\d{5}$/"
       :researcher="researcher"
       :required="true"
     />
@@ -55,11 +54,24 @@ export default {
     getCity: function() {
       return this.$refs.city.getValue();
     },
-
+    isValid: function() {
+      const adressInput = this.$refs.address;
+      const cityInput = this.$refs.city;
+      const postalInput = this.$refs.postal;
+      return adressInput.isValid() && cityInput.isValid() && postalInput.isValid();
+    },
+    checkErrors: function() {
+      const adressInput = this.$refs.address;
+      const cityInput = this.$refs.city;
+      const postalInput = this.$refs.postal;
+      postalInput.checkErrors();
+      cityInput.checkErrors();
+      adressInput.checkErrors();
+    },
   },
   data(){
     return{
-      researcher:new AddressResearcher()
+      researcher: new AddressResearcher()
     }
   },
 }

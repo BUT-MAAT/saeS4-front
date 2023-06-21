@@ -7,11 +7,13 @@
       :placeholder="placeholder"
       ref="input"
       :charactersAllowed="charactersAllowed"
-      :pattern="pattern"
       @valueUpdated="valueUpdated"
       :required="required"
     />
-    <search-result :results=matchingPostaux @value-picked="valuePicked"></search-result>
+    <search-result v-if="matchingPostaux.length > 0"
+                   :results="matchingPostaux"
+                   @value-picked="valuePicked"
+    />
   </div>
 </template>
 
@@ -32,11 +34,8 @@ export default {
       type: String,
       required: true,
     },
-    charactersAllowed: {
-      type: String,
-      default: " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789._-@",
-    },
-    researcher:{
+    charactersAllowed: String,
+    researcher: {
       type: IResearcher,
       required: true,
     },
@@ -57,7 +56,7 @@ export default {
      * @param value the input's value
      */
     valueUpdated: function(value){
-      this.researcher.getSearchResult(value).then(res =>{
+      this.researcher.getSearchResult(value).then(res => {
         this.matchingPostaux = res
       })
         .catch(reason => {});
@@ -83,6 +82,15 @@ export default {
 
     getValue() {
       return this.$refs.input.getValue();
+    },
+
+    isValid: function() {
+      const input = this.$refs.input;
+      return input.isValid();
+    },
+    checkErrors: function() {
+      const input = this.$refs.input;
+      input.checkErrors();
     },
   },
 }

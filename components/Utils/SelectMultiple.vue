@@ -1,9 +1,13 @@
 <template>
   <div class="select-multiple">
     <div class="items-available">
+      <div class="loader" v-if="loading"></div>
       <InfoCard class="item"
-           v-for="(item, index) in items"
-           :class="{ 'disabled-item': isInSelectedItems(item) }"
+                v-else
+                v-for="(item, index) in items"
+                :name="item[displayField]"
+                :infos="item.infos"
+                :class="{ 'disabled-item': isInSelectedItems(item) }"
       >
         <span>{{ item[displayField] }}</span>
         <span class="select-item"
@@ -18,7 +22,9 @@
     <div class="items-selected">
       <div class="selected-items">
         <InfoCard class="selected-item"
-             v-for="(item, index) in selectedItems"
+                  v-for="(item, index) in selectedItems"
+                  :name="item[displayField]"
+                  :infos="item.infos"
         >
           <span>{{ item[displayField] }}</span>
           <span class="remove-selected-item"
@@ -40,6 +46,7 @@ export default {
   data() {
     return {
       selectedItems: [],
+      loading: false,
     }
   },
   props: {
@@ -49,6 +56,12 @@ export default {
     maxToSelect: Number,
   },
   methods: {
+    startLoadingItems: function() {
+      this.loading = true;
+    },
+    stopLoadingItems: function() {
+      this.loading = false;
+    },
     selectItem: function(index) {
       const item = this.items[index];
       if (!this.isInSelectedItems(item) && this.selectedItems.length < this.maxToSelect) {
@@ -92,7 +105,7 @@ export default {
     },
 
     getSelectedItems: function() {
-      return this.selectedItems;
+      return this.selectedItems ? this.selectedItems : [];
     },
 
     isValid: function() {
@@ -104,6 +117,7 @@ export default {
 
 <style scoped>
 .items-available {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
@@ -117,6 +131,9 @@ export default {
   color: var(--white);
   background-color: var(--dark-blue);
   padding: 4px 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 .item:hover {
   cursor: default;
@@ -171,5 +188,21 @@ export default {
   fill: black;
   width: 16px;
   height: auto;
+}
+
+.loader {
+  justify-self: center;
+  margin: auto;
+  border: 12px solid #c3c3c3; /* Light grey */
+  border-top: 12px solid var(--light-blue);
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 1s cubic-bezier(1, 0, 0.4, 1) infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>
