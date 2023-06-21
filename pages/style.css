@@ -1,0 +1,42 @@
+:root {
+  /* ===== COLORS ===== */
+  --dark-blue: #18314f;
+  --light-blue: #8bbeb2;
+  --white: #fbfbff;
+  --active: #C8F24F;
+  --error: #d92525;
+
+  /* ===== GLOBAL VARS ===== */
+  --topBar-height: 64px;
+  --navBar-height: 96px;
+}
+
+*, *::before, *::after {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, serif;
+  background-color: #fbfbff;
+}
+/* Scroll bar stylings */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--light-blue);
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

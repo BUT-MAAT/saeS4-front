@@ -1,5 +1,15 @@
 # saeS4-front
 
+## IMPORTANT
+NodeJs should not be v18 ! Use v16 (like v16.17.0)
+
+To change NodeJs version :
+- install *nvm-setup.exe* (https://github.com/coreybutler/nvm-windows/releases)
+- `nvm install <version>`
+- `nvm use [version]`
+
+To check do `nvm ls` or `nvm current`
+
 ## Build Setup
 
 ```bash

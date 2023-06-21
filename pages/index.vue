@@ -1,5 +1,12 @@
 <template>
-  <Tutorial />
+  <div id="app">
+    <Hero>
+      <Title>Communauté d'agglomération du Beauvaisis</Title>
+      <HeroSearchBar />
+    </Hero>
+    <QuickAccess />
+    <News />
+  </div>
 </template>
 
 <script lang="ts">
